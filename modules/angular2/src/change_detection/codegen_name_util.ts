@@ -41,11 +41,11 @@ export class CodegenNameUtil {
    * Record names sanitized for use as fields.
    * See [sanitizeName] for details.
    */
-  _sanitizedNames: List<string>;
-  _sanitizedEventNames: Map<EventBinding, List<string>>;
+  _sanitizedNames: string[];
+  _sanitizedEventNames: Map<EventBinding, string[]>;
 
-  constructor(private records: List<ProtoRecord>, private eventBindings: EventBinding[],
-              private directiveRecords: List<any>, private utilName: string) {
+  constructor(private records: ProtoRecord[], private eventBindings: EventBinding[],
+              private directiveRecords: any[], private utilName: string) {
     this._sanitizedNames = ListWrapper.createFixedSize(this.records.length + 1);
     this._sanitizedNames[CONTEXT_INDEX] = _CONTEXT_ACCESSOR;
     for (var i = 0, iLen = this.records.length; i < iLen; ++i) {
@@ -135,7 +135,7 @@ export class CodegenNameUtil {
 
   getFieldName(idx: number): string { return this._addFieldPrefix(this._sanitizedNames[idx]); }
 
-  getAllFieldNames(): List<string> {
+  getAllFieldNames(): string[] {
     var fieldList = [];
     for (var k = 0, kLen = this.getFieldCount(); k < kLen; ++k) {
       if (k === 0 || this.records[k - 1].shouldBeChecked()) {

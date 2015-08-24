@@ -72,10 +72,10 @@ export class NgFormControl extends NgControl {
   _added = false;
   model: any;
   viewModel: any;
-  ngValidators: QueryList<NgValidator>;
+  ngValidators: QueryNgValidator[];
 
   // Scope the query once https://github.com/angular/angular/issues/2603 is fixed
-  constructor(@Query(NgValidator) ngValidators: QueryList<NgValidator>) {
+  constructor(@Query(NgValidator) ngValidators: QueryNgValidator[]) {
     super();
     this.ngValidators = ngValidators;
   }
@@ -91,7 +91,7 @@ export class NgFormControl extends NgControl {
     }
   }
 
-  get path(): List<string> { return []; }
+  get path(): string[] { return []; }
 
   get control(): Control { return this.form; }
 

@@ -90,7 +90,7 @@ export class DomRenderer extends Renderer {
         .boundElements[location.renderBoundElementIndex];
   }
 
-  getRootNodes(fragment: RenderFragmentRef): List<Node> {
+  getRootNodes(fragment: RenderFragmentRef): Node[] {
     return resolveInternalDomFragment(fragment);
   }
 
@@ -188,7 +188,7 @@ export class DomRenderer extends Renderer {
     view.setElementStyle(location.renderBoundElementIndex, styleName, styleValue);
   }
 
-  invokeElementMethod(location: RenderElementRef, methodName: string, args: List<any>): void {
+  invokeElementMethod(location: RenderElementRef, methodName: string, args: any[]): void {
     if (isBlank(location.renderBoundElementIndex)) {
       return;
     }

@@ -17,14 +17,14 @@ export function isControl(c: Object): boolean {
   return c instanceof AbstractControl;
 }
 
-function _find(c: AbstractControl, path: List<string | number>| string) {
+function _find(c: AbstractControl, path: string | number[]| string) {
   if (isBlank(path)) return null;
   if (!(path instanceof List)) {
     path = StringWrapper.split(<string>path, new RegExp("/"));
   }
   if (path instanceof List && ListWrapper.isEmpty(path)) return null;
 
-  return ListWrapper.reduce(<List<string | number>>path, (v, name) => {
+  return ListWrapper.reduce(<string | number>>path, (v, name) =[] {
     if (v instanceof ControlGroup) {
       return isPresent(v.controls[name]) ? v.controls[name] : null;
     } else if (v instanceof ControlArray) {
@@ -116,9 +116,9 @@ export class AbstractControl {
     }
   }
 
-  find(path: List<string | number>| string): AbstractControl { return _find(this, path); }
+  find(path: string | number[]| string): AbstractControl { return _find(this, path); }
 
-  getError(errorCode: string, path: List<string> = null): any {
+  getError(errorCode: string, path: string[] = null): any {
     var c = isPresent(path) && !ListWrapper.isEmpty(path) ? this.find(path) : this;
     if (isPresent(c) && isPresent(c._errors)) {
       return StringMapWrapper.get(c._errors, errorCode);
@@ -127,7 +127,7 @@ export class AbstractControl {
     }
   }
 
-  hasError(errorCode: string, path: List<string> = null): boolean {
+  hasError(errorCode: string, path: string[] = null): boolean {
     return isPresent(this.getError(errorCode, path));
   }
 
@@ -262,9 +262,9 @@ export class ControlGroup extends AbstractControl {
  * other controls, but is of fixed length.
  */
 export class ControlArray extends AbstractControl {
-  controls: List<AbstractControl>;
+  controls: AbstractControl[];
 
-  constructor(controls: List<AbstractControl>, validator: Function = Validators.array) {
+  constructor(controls: AbstractControl[], validator: Function = Validators.array) {
     super(validator);
     this.controls = controls;
 

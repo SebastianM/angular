@@ -7,10 +7,10 @@ import {QueryList} from 'angular2/src/core/compiler/query_list';
 
 export function main() {
   describe('QueryList', () => {
-    var queryList: QueryList<string>;
+    var queryList: Querystring[];
     var log: string;
     beforeEach(() => {
-      queryList = new QueryList<string>();
+      queryList = new Querystring[]();
       log = '';
     });
 

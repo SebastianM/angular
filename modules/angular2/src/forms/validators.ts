@@ -17,9 +17,18 @@ export class Validators {
     return isBlank(c.value) || c.value == "" ? {"required": true} : null;
   }
 
+  static minLength(c: modelModule.Control): StringMap<string, boolean> {
+    return isBlank(c.value) && c.value.length === 0 ? null : {"minLength": true};
+  }
+
+  static maxLength(c: modelModule.Control): StringMap<string, boolean> {
+    c.
+    return isBlank(c.value) ||  c.value.length === 0 ? null : { "maxLength": true };
+  }
+
   static nullValidator(c: any): StringMap<string, boolean> { return null; }
 
-  static compose(validators: List<Function>): Function {
+  static compose(validators: Function[]): Function {
     return function(c: modelModule.Control) {
       var res = ListWrapper.reduce(validators, (res, validator) => {
         var errors = validator(c);

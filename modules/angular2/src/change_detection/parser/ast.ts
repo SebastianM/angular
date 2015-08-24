@@ -1,5 +1,5 @@
 import {isBlank, isPresent, FunctionWrapper, BaseException} from "angular2/src/facade/lang";
-import {List, Map, ListWrapper, StringMapWrapper} from "angular2/src/facade/collection";
+import {Map, ListWrapper, StringMapWrapper} from "angular2/src/facade/collection";
 
 export class AST {
   visit(visitor: AstVisitor): any { return null; }
@@ -20,7 +20,7 @@ export class ImplicitReceiver extends AST {
  * Multiple expressions separated by a semicolon.
  */
 export class Chain extends AST {
-  constructor(public expressions: List<any>) { super(); }
+  constructor(public expressions: any[]) { super(); }
   visit(visitor: AstVisitor): any { return visitor.visitChain(this); }
 }
 
@@ -63,7 +63,7 @@ export class KeyedWrite extends AST {
 }
 
 export class BindingPipe extends AST {
-  constructor(public exp: AST, public name: string, public args: List<any>) { super(); }
+  constructor(public exp: AST, public name: string, public args: any[]) { super(); }
 
   visit(visitor: AstVisitor): any { return visitor.visitPipe(this); }
 }
@@ -74,17 +74,17 @@ export class LiteralPrimitive extends AST {
 }
 
 export class LiteralArray extends AST {
-  constructor(public expressions: List<any>) { super(); }
+  constructor(public expressions: any[]) { super(); }
   visit(visitor: AstVisitor): any { return visitor.visitLiteralArray(this); }
 }
 
 export class LiteralMap extends AST {
-  constructor(public keys: List<any>, public values: List<any>) { super(); }
+  constructor(public keys: any[], public values: any[]) { super(); }
   visit(visitor: AstVisitor): any { return visitor.visitLiteralMap(this); }
 }
 
 export class Interpolation extends AST {
-  constructor(public strings: List<any>, public expressions: List<any>) { super(); }
+  constructor(public strings: any[], public expressions: any[]) { super(); }
   visit(visitor: AstVisitor) { visitor.visitInterpolation(this); }
 }
 
@@ -100,7 +100,7 @@ export class PrefixNot extends AST {
 
 export class MethodCall extends AST {
   constructor(public receiver: AST, public name: string, public fn: Function,
-              public args: List<any>) {
+              public args: any[]) {
     super();
   }
   visit(visitor: AstVisitor): any { return visitor.visitMethodCall(this); }
@@ -108,14 +108,14 @@ export class MethodCall extends AST {
 
 export class SafeMethodCall extends AST {
   constructor(public receiver: AST, public name: string, public fn: Function,
-              public args: List<any>) {
+              public args: any[]) {
     super();
   }
   visit(visitor: AstVisitor): any { return visitor.visitSafeMethodCall(this); }
 }
 
 export class FunctionCall extends AST {
-  constructor(public target: AST, public args: List<any>) { super(); }
+  constructor(public target: AST, public args: any[]) { super(); }
   visit(visitor: AstVisitor): any { return visitor.visitFunctionCall(this); }
 }
 
@@ -222,7 +222,7 @@ export class RecursiveAstVisitor implements AstVisitor {
     ast.receiver.visit(this);
     return this.visitAll(ast.args);
   }
-  visitAll(asts: List<AST>): any {
+  visitAll(asts: AST[]): any {
     ListWrapper.forEach(asts, (ast) => { ast.visit(this); });
     return null;
   }
@@ -294,7 +294,7 @@ export class AstTransformer implements AstVisitor {
     return new KeyedWrite(ast.obj.visit(this), ast.key.visit(this), ast.value.visit(this));
   }
 
-  visitAll(asts: List<any>): List<any> {
+  visitAll(asts: any[]): any[] {
     var res = ListWrapper.createFixedSize(asts.length);
     for (var i = 0; i < asts.length; ++i) {
       res[i] = asts[i].visit(this);

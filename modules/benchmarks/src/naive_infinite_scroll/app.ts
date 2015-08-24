@@ -25,7 +25,7 @@ import {Component, Directive, View} from 'angular2/angular2';
   </div>`
 })
 export class App {
-  scrollAreas: List<number>;
+  scrollAreas: number[];
   iterationCount: number;
   scrollIncrement: number;
 

@@ -18,7 +18,7 @@ export class DomProtoViewRef extends RenderProtoViewRef {
 export class DomProtoView {
   static create(templateCloner: TemplateCloner, type: ViewType, rootElement: Element,
                 viewEncapsulation: ViewEncapsulation, fragmentsRootNodeCount: number[],
-                rootTextNodeIndices: number[], elementBinders: List<DomElementBinder>,
+                rootTextNodeIndices: number[], elementBinders: DomElementBinder[],
                 hostAttributes: Map<string, string>): DomProtoView {
     var boundTextNodeCount = rootTextNodeIndices.length;
     for (var i = 0; i < elementBinders.length; i++) {
@@ -34,7 +34,7 @@ export class DomProtoView {
   // Note: fragments are separated by a comment node that is not counted in fragmentsRootNodeCount!
   constructor(public type: ViewType, public cloneableTemplate: Element | string,
               public encapsulation: ViewEncapsulation,
-              public elementBinders: List<DomElementBinder>,
+              public elementBinders: DomElementBinder[],
               public hostAttributes: Map<string, string>, public rootTextNodeIndices: number[],
               public boundTextNodeCount: number, public fragmentsRootNodeCount: number[],
               public isSingleElementFragment: boolean) {}

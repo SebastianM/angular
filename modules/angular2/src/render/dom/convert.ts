@@ -44,8 +44,8 @@ export function directiveMetadataFromMap(map: Map<string, any>): RenderDirective
     hostListeners:<Map<string, string>>_cloneIfPresent(map.get('hostListeners')),
     hostActions:<Map<string, string>>_cloneIfPresent(map.get('hostActions')),
     hostAttributes:<Map<string, string>>_cloneIfPresent(map.get('hostAttributes')),
-    properties:<List<string>>_cloneIfPresent(map.get('properties')),
-    readAttributes:<List<string>>_cloneIfPresent(map.get('readAttributes')),
+    properties:<string>[]_cloneIfPresent(map.get('properties')),
+    readAttributes:<string>[]_cloneIfPresent(map.get('readAttributes')),
     type:<number>map.get('type'),
     exportAs:<string>map.get('exportAs'),
     callOnDestroy:<boolean>map.get('callOnDestroy'),
@@ -53,7 +53,7 @@ export function directiveMetadataFromMap(map: Map<string, any>): RenderDirective
     callOnChange:<boolean>map.get('callOnChange'),
     callOnInit:<boolean>map.get('callOnInit'),
     callOnAllChangesDone:<boolean>map.get('callOnAllChangesDone'),
-    events:<List<string>>_cloneIfPresent(map.get('events')),
+    events:<string>[]_cloneIfPresent(map.get('events')),
     changeDetection:<string>map.get('changeDetection'),
   });
 }

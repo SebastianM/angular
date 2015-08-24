@@ -1175,8 +1175,8 @@ class TestData {
 }
 
 class FakeDirectives {
-  constructor(public directives: List<TestData | TestDirective>,
-              public detectors: List<ProtoChangeDetector>) {}
+  constructor(public directives: TestData | TestDirective[],
+              public detectors: ProtoChangeDetector[]) {}
 
   getDirectiveFor(di: DirectiveIndex) { return this.directives[di.directiveIndex]; }
 
@@ -1186,7 +1186,7 @@ class FakeDirectives {
 class TestDispatcher implements ChangeDispatcher {
   log: string[];
   debugLog: string[];
-  loggedValues: List<any>;
+  loggedValues: any[];
   onAllChangesDoneCalled: boolean = false;
 
   constructor() { this.clear(); }

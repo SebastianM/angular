@@ -3,7 +3,7 @@ import {DOM} from 'angular2/src/dom/dom_adapter';
 import {isPresent, isString, RegExpWrapper, StringWrapper, RegExp} from 'angular2/src/facade/lang';
 
 export class Log {
-  _result: List<any>;
+  _result: any[];
 
   constructor() { this._result = []; }
 

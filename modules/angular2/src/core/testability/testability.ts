@@ -15,7 +15,7 @@ import {PromiseWrapper} from 'angular2/src/facade/async';
 @Injectable()
 export class Testability {
   _pendingCount: number = 0;
-  _callbacks: List<Function> = [];
+  _callbacks: Function[] = [];
   _isAngularEventPending: boolean = false;
 
   constructor(public _ngZone: NgZone) { this._watchAngularEvents(_ngZone); }
@@ -66,7 +66,7 @@ export class Testability {
   // check for stability.
   isAngularEventPending(): boolean { return this._isAngularEventPending; }
 
-  findBindings(using: any, binding: string, exactMatch: boolean): List<any> {
+  findBindings(using: any, binding: string, exactMatch: boolean): any[] {
     // TODO(juliemr): implement.
     return [];
   }
@@ -82,7 +82,7 @@ export class TestabilityRegistry {
     this._applications.set(token, testability);
   }
 
-  getAllTestabilities(): List<Testability> { return MapWrapper.values(this._applications); }
+  getAllTestabilities(): Testability[] { return MapWrapper.values(this._applications); }
 
   findTestabilityInTree(elem: Node, findInAncestors: boolean = true): Testability {
     if (elem == null) {

@@ -22,7 +22,7 @@ export class ViewContainerRef {
    */
   constructor(public viewManager: avmModule.AppViewManager, public element: ElementRef) {}
 
-  private _getViews(): List<viewModule.AppView> {
+  private _getViews(): viewModule.AppView[] {
     var vc = internalView(this.element.parentView).viewContainers[this.element.boundElementIndex];
     return isPresent(vc) ? vc.views : [];
   }

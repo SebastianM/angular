@@ -88,7 +88,7 @@ export class Router {
    * ]);
    * ```
    */
-  config(definitions: List<RouteDefinition>): Promise<any> {
+  config(definitions: RouteDefinition>): Promise<any[] {
     definitions.forEach(
         (routeDefinition) => { this.registry.config(this.hostComponent, routeDefinition); });
     return this.renavigate();
@@ -157,7 +157,7 @@ export class Router {
   // we begin navigation. The method below simply traverses instructions and resolves any components
   // for which `componentType` is not present
   _settleInstruction(instruction: Instruction): Promise<any> {
-    var unsettledInstructions: List<Promise<any>> = [];
+    var unsettledInstructions: Promise<any>[] = [];
     if (isBlank(instruction.component.componentType)) {
       unsettledInstructions.push(instruction.component.resolveComponentType());
     }
@@ -282,7 +282,7 @@ export class Router {
    * Generate a URL from a component name and optional map of parameters. The URL is relative to the
    * app's base href.
    */
-  generate(linkParams: List<any>): Instruction {
+  generate(linkParams: any[]): Instruction {
     let normalizedLinkParams = splitAndFlattenLinkParams(linkParams);
 
     var first = ListWrapper.first(normalizedLinkParams);
@@ -389,7 +389,7 @@ class ChildRouter extends Router {
  * Returns: ['', 'a', 'b', {c: 2}]
  */
 var SLASH = new RegExp('/');
-function splitAndFlattenLinkParams(linkParams: List<any>): List<any> {
+function splitAndFlattenLinkParams(linkParams: any>): List<any[] {
   return ListWrapper.reduce(linkParams, (accumulation, item) => {
     if (isString(item)) {
       return ListWrapper.concat(accumulation, StringWrapper.split(item, SLASH));

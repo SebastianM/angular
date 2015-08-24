@@ -37,7 +37,7 @@ export function setUpControl(c: Control, dir: NgControl) {
   dir.valueAccessor.registerOnTouched(() => c.markAsTouched());
 }
 
-export function composeNgValidator(ngValidators: QueryList<NgValidator>): Function {
+export function composeNgValidator(ngValidators: QueryNgValidator[]): Function {
   if (isBlank(ngValidators)) return Validators.nullValidator;
   return Validators.compose(ngValidators.map(v => v.validator));
 }

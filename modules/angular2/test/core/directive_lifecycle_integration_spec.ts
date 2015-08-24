@@ -60,7 +60,7 @@ export function main() {
 })
 class LifecycleDir {
   field;
-  log: List<string>;
+  log: string[];
 
   constructor() { this.log = []; }
 

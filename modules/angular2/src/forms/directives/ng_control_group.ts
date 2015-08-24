@@ -68,7 +68,7 @@ export class NgControlGroup extends ControlContainer {
 
   get control(): ControlGroup { return this.formDirective.getControlGroup(this); }
 
-  get path(): List<string> { return controlPath(this.name, this._parent); }
+  get path(): string[] { return controlPath(this.name, this._parent); }
 
   get formDirective(): Form { return this._parent.formDirective; }
 }

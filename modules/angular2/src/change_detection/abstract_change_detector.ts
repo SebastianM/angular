@@ -26,8 +26,8 @@ class _Context {
 }
 
 export class AbstractChangeDetector<T> implements ChangeDetector {
-  lightDomChildren: List<any> = [];
-  shadowDomChildren: List<any> = [];
+  lightDomChildren: any[] = [];
+  shadowDomChildren: any[] = [];
   parent: ChangeDetector;
   ref: ChangeDetectorRef;
 

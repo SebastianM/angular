@@ -33,7 +33,7 @@ import {NgFor} from 'angular2/src/directives/ng_for';
 
 @Injectable()
 class Logger {
-  log: List<string>;
+  log: string[];
 
   constructor() { this.log = []; }
 
@@ -119,7 +119,7 @@ class EventsComp {
 })
 @Injectable()
 class UsingFor {
-  stuff: List<string>;
+  stuff: string[];
 
   constructor() { this.stuff = ['one', 'two', 'three']; }
 }

@@ -82,7 +82,7 @@ var _rootInjector: Injector;
 // Contains everything that is safe to share between applications.
 var _rootBindings = [bind(Reflector).toValue(reflector), TestabilityRegistry];
 
-function _injectorBindings(appComponentType): List<Type | Binding | List<any>> {
+function _injectorBindings(appComponentType): Type | Binding | List<any>[] {
   var bestChangeDetection = new DynamicChangeDetection();
   if (PreGeneratedChangeDetection.isSupported()) {
     bestChangeDetection = new PreGeneratedChangeDetection();
@@ -290,7 +290,7 @@ export function createNgZone(): NgZone {
  */
 export function commonBootstrap(
     appComponentType: /*Type*/ any,
-    componentInjectableBindings: List<Type | Binding | List<any>> = null): Promise<ApplicationRef> {
+    componentInjectableBindings: Type | Binding | List<any>> = null): Promise<ApplicationRef[] {
   BrowserDomAdapter.makeCurrent();
   wtfInit();
   var bootstrapProcess = PromiseWrapper.completer();
@@ -336,7 +336,7 @@ export function commonBootstrap(
   return bootstrapProcess.promise;
 }
 
-function _createAppInjector(appComponentType: Type, bindings: List<Type | Binding | List<any>>,
+function _createAppInjector(appComponentType: Type, bindings: Type | Binding | List<any>[],
                             zone: NgZone): Injector {
   if (isBlank(_rootInjector)) _rootInjector = Injector.resolveAndCreate(_rootBindings);
   var mergedBindings: any[] =

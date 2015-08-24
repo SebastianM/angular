@@ -4,9 +4,9 @@ import {isBlank, isPresent, normalizeBlank, BaseException} from 'angular2/src/fa
 import {PromiseCompleter, PromiseWrapper, Promise} from 'angular2/src/facade/async';
 
 export class MockXHR extends XHR {
-  private _expectations: List<_Expectation>;
+  private _expectations: _Expectation[];
   private _definitions: Map<string, string>;
-  private _requests: List<_PendingRequest>;
+  private _requests: _PendingRequest[];
 
   constructor() {
     super();

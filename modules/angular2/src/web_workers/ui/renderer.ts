@@ -27,7 +27,7 @@ export class MessageBasedRenderer {
                                 (message: StringMap<string, any>) => this._handleMessage(message));
   }
 
-  private _createViewHelper(args: List<any>, method) {
+  private _createViewHelper(args: any[], method) {
     var hostProtoView = this._serializer.deserialize(args[0], RenderProtoViewRef);
     var fragmentCount = args[1];
     var startIndex, renderViewWithFragments;

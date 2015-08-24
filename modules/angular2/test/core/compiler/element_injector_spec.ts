@@ -158,26 +158,26 @@ class NeedsAttributeNoType {
 
 @Injectable()
 class NeedsQuery {
-  query: QueryList<CountingDirective>;
-  constructor(@Query(CountingDirective) query: QueryList<CountingDirective>) { this.query = query; }
+  query: QueryCountingDirective[];
+  constructor(@Query(CountingDirective) query: QueryCountingDirective[]) { this.query = query; }
 }
 
 @Injectable()
 class NeedsViewQuery {
-  query: QueryList<CountingDirective>;
-  constructor(@ViewQuery(CountingDirective) query: QueryList<CountingDirective>) { this.query = query; }
+  query: QueryCountingDirective[];
+  constructor(@ViewQuery(CountingDirective) query: QueryCountingDirective[]) { this.query = query; }
 }
 
 @Injectable()
 class NeedsQueryByVarBindings {
-  query: QueryList<any>;
-  constructor(@Query("one,two") query: QueryList<any>) { this.query = query; }
+  query: Queryany[];
+  constructor(@Query("one,two") query: Queryany[]) { this.query = query; }
 }
 
 @Injectable()
 class NeedsTemplateRefQuery {
-  query: QueryList<TemplateRef>;
-  constructor(@Query(TemplateRef) query: QueryList<TemplateRef>) { this.query = query; }
+  query: QueryTemplateRef[];
+  constructor(@Query(TemplateRef) query: QueryTemplateRef[]) { this.query = query; }
 }
 
 @Injectable()
@@ -263,7 +263,7 @@ export function main() {
     return ProtoElementInjector.create(parent, index, directiveBinding, hasShadowRoot, distance, dirVariableBindings);
   }
 
-  function humanize(tree: TreeNode<any>, names: List<List<any>>) {
+  function humanize(tree: TreeNode<any>, names: List<any>[]) {
     var lookupName = (item) =>
         ListWrapper.last(ListWrapper.find(names, (pair) => pair[0] === item));
 
@@ -298,8 +298,8 @@ export function main() {
     return child;
   }
 
-  function hostShadowInjectors(hostBindings: List<any>,
-                               shadowBindings: List<any>, imperativelyCreatedInjector = null): ElementInjector {
+  function hostShadowInjectors(hostBindings: any[],
+                               shadowBindings: any[], imperativelyCreatedInjector = null): ElementInjector {
     var protoHost = createPei(null, 0, hostBindings, 0, true);
     var host = protoHost.instantiate(null);
     host.hydrate(null, null, defaultPreBuiltObjects);

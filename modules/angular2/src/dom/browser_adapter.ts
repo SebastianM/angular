@@ -59,7 +59,7 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
   hasProperty(element, name: string): boolean { return name in element; }
   setProperty(el: /*element*/ any, name: string, value: any) { el[name] = value; }
   getProperty(el: /*element*/ any, name: string): any { return el[name]; }
-  invoke(el: /*element*/ any, methodName: string, args: List<any>): any {
+  invoke(el: /*element*/ any, methodName: string, args: any[]): any {
     el[methodName].apply(el, args);
   }
 
@@ -86,7 +86,7 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
 
   query(selector: string): any { return document.querySelector(selector); }
   querySelector(el, selector: string): HTMLElement { return el.querySelector(selector); }
-  querySelectorAll(el, selector: string): List<any> { return el.querySelectorAll(selector); }
+  querySelectorAll(el, selector: string): any[] { return el.querySelectorAll(selector); }
   on(el, evt, listener) { el.addEventListener(evt, listener, false); }
   onAndCancel(el, evt, listener): Function {
     el.addEventListener(evt, listener, false);
@@ -127,8 +127,8 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
   firstChild(el): Node { return el.firstChild; }
   nextSibling(el): Node { return el.nextSibling; }
   parentElement(el): Node { return el.parentNode; }
-  childNodes(el): List<Node> { return el.childNodes; }
-  childNodesAsList(el): List<any> {
+  childNodes(el): Node[] { return el.childNodes; }
+  childNodesAsList(el): any[] {
     var childNodes = el.childNodes;
     var res = ListWrapper.createFixedSize(childNodes.length);
     for (var i = 0; i < childNodes.length; i++) {
@@ -183,14 +183,14 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
   getShadowRoot(el: HTMLElement): DocumentFragment { return (<any>el).shadowRoot; }
   getHost(el: HTMLElement): HTMLElement { return (<any>el).host; }
   clone(node: Node): Node { return node.cloneNode(true); }
-  getElementsByClassName(element, name: string): List<HTMLElement> {
+  getElementsByClassName(element, name: string): HTMLElement[] {
     return element.getElementsByClassName(name);
   }
-  getElementsByTagName(element, name: string): List<HTMLElement> {
+  getElementsByTagName(element, name: string): HTMLElement[] {
     return element.getElementsByTagName(name);
   }
-  classList(element): List<any> {
-    return <List<any>>Array.prototype.slice.call(element.classList, 0);
+  classList(element): any[] {
+    return <any>[]Array.prototype.slice.call(element.classList, 0);
   }
   addClass(element, classname: string) { element.classList.add(classname); }
   removeClass(element, classname: string) { element.classList.remove(classname); }

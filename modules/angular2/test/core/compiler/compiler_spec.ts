@@ -56,8 +56,8 @@ export function main() {
         cmpUrlMapper, rootProtoView;
     var renderCompileRequests: any[];
 
-    function createCompiler(renderCompileResults: List<ProtoViewDto | Promise<ProtoViewDto>>,
-                            protoViewFactoryResults: List<AppProtoView>) {
+    function createCompiler(renderCompileResults: ProtoViewDto | Promise<ProtoViewDto>[],
+                            protoViewFactoryResults: AppProtoView[]) {
       var urlResolver = new UrlResolver();
       renderCompileRequests = [];
       renderCompileResults = ListWrapper.clone(renderCompileResults);
@@ -84,7 +84,7 @@ export function main() {
                 createRenderProtoView([createRenderComponentElementBinder(0)], ViewType.HOST));
           });
       renderCompiler.spy('mergeProtoViewsRecursively')
-          .andCallFake((protoViewRefs: List<RenderProtoViewRef | List<any>>) => {
+          .andCallFake((protoViewRefs: RenderProtoViewRef | List<any>>) =[] {
             return PromiseWrapper.resolve(new RenderProtoViewMergeMapping(
                 new MergedRenderProtoViewRef(protoViewRefs), 1, [], 0, [], [], [null]));
           });
@@ -733,15 +733,15 @@ class FakeViewResolver extends ViewResolver {
 }
 
 class FakeProtoViewFactory extends ProtoViewFactory {
-  requests: List<List<any>>;
+  requests: List<any>[];
 
-  constructor(public results: List<AppProtoView>) {
+  constructor(public results: AppProtoView[]) {
     super(null);
     this.requests = [];
   }
 
   createAppProtoViews(componentBinding: DirectiveBinding, renderProtoView: ProtoViewDto,
-                      directives: List<DirectiveBinding>, pipes: PipeBinding[]): AppProtoView[] {
+                      directives: DirectiveBinding[], pipes: PipeBinding[]): AppProtoView[] {
     this.requests.push([componentBinding, renderProtoView, directives, pipes]);
     return collectEmbeddedPvs(ListWrapper.removeAt(this.results, 0));
   }

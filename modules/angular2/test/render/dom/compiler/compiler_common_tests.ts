@@ -290,15 +290,15 @@ function templateRoot(protoViewDto: ProtoViewDto): Element {
 }
 
 class MockStepFactory extends CompileStepFactory {
-  steps: List<CompileStep>;
-  subTaskPromises: List<Promise<any>>;
+  steps: CompileStep[];
+  subTaskPromises: Promise<any>[];
   viewDef: ViewDefinition;
 
   constructor(steps) {
     super();
     this.steps = steps;
   }
-  createSteps(viewDef): List<CompileStep> {
+  createSteps(viewDef): CompileStep[] {
     this.viewDef = viewDef;
     return this.steps;
   }

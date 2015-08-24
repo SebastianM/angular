@@ -78,7 +78,7 @@ class PrintLogger {
 }
 
 function _injectorBindings(appComponentType, bus: MessageBus, initData: StringMap<string, any>):
-    List<Type | Binding | List<any>> {
+    Type | Binding | List<any>[] {
   var bestChangeDetection = new DynamicChangeDetection();
   if (PreGeneratedChangeDetection.isSupported()) {
     bestChangeDetection = new PreGeneratedChangeDetection();
@@ -143,7 +143,7 @@ function _injectorBindings(appComponentType, bus: MessageBus, initData: StringMa
 
 export function bootstrapWebWorkerCommon(
     appComponentType: Type, bus: MessageBus,
-    componentInjectableBindings: List<Type | Binding | List<any>> = null): Promise<ApplicationRef> {
+    componentInjectableBindings: Type | Binding | List<any>> = null): Promise<ApplicationRef[] {
   var bootstrapProcess: PromiseCompleter<any> = PromiseWrapper.completer();
 
   var zone = new NgZone({enableLongStackTrace: assertionsEnabled()});
@@ -186,7 +186,7 @@ export function bootstrapWebWorkerCommon(
   return bootstrapProcess.promise;
 }
 
-function _createAppInjector(appComponentType: Type, bindings: List<Type | Binding | List<any>>,
+function _createAppInjector(appComponentType: Type, bindings: Type | Binding | List<any>[],
                             zone: NgZone, bus: MessageBus, initData: StringMap<string, any>):
     Injector {
   if (isBlank(_rootInjector)) _rootInjector = Injector.resolveAndCreate(_rootBindings);

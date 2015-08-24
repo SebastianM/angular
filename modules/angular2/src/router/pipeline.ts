@@ -9,7 +9,7 @@ import {Injectable} from 'angular2/di';
  */
 @Injectable()
 export class Pipeline {
-  steps: List<Function>;
+  steps: Function[];
 
   constructor() { this.steps = [instruction => instruction.router.activateOutlets(instruction)]; }
 

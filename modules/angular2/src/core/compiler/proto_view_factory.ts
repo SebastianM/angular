@@ -34,7 +34,7 @@ import {ProtoElementInjector, DirectiveBinding} from './element_injector';
 export class BindingRecordsCreator {
   _directiveRecordsMap: Map<number, DirectiveRecord> = new Map();
 
-  getEventBindingRecords(elementBinders: List<RenderElementBinder>,
+  getEventBindingRecords(elementBinders: RenderElementBinder[],
                          allDirectiveMetadatas: RenderDirectiveMetadata[]): BindingRecord[] {
     var res = [];
     for (var boundElementIndex = 0; boundElementIndex < elementBinders.length;
@@ -69,10 +69,10 @@ export class BindingRecordsCreator {
     }
   }
 
-  getPropertyBindingRecords(textBindings: List<ASTWithSource>,
-                            elementBinders: List<RenderElementBinder>,
+  getPropertyBindingRecords(textBindings: ASTWithSource[],
+                            elementBinders: RenderElementBinder[],
                             allDirectiveMetadatas:
-                                List<RenderDirectiveMetadata>): List<BindingRecord> {
+                                RenderDirectiveMetadata>): List<BindingRecord[] {
     var bindings = [];
 
     this._createTextNodeRecords(bindings, textBindings);
@@ -87,8 +87,8 @@ export class BindingRecordsCreator {
     return bindings;
   }
 
-  getDirectiveRecords(elementBinders: List<RenderElementBinder>,
-                      allDirectiveMetadatas: List<RenderDirectiveMetadata>): List<DirectiveRecord> {
+  getDirectiveRecords(elementBinders: RenderElementBinder[],
+                      allDirectiveMetadatas: RenderDirectiveMetadata>): List<DirectiveRecord[] {
     var directiveRecords = [];
 
     for (var elementIndex = 0; elementIndex < elementBinders.length; ++elementIndex) {
@@ -102,13 +102,13 @@ export class BindingRecordsCreator {
     return directiveRecords;
   }
 
-  _createTextNodeRecords(bindings: List<BindingRecord>, textBindings: List<ASTWithSource>) {
+  _createTextNodeRecords(bindings: BindingRecord>, textBindings: List<ASTWithSource[]) {
     for (var i = 0; i < textBindings.length; i++) {
       bindings.push(BindingRecord.createForTextNode(textBindings[i], i));
     }
   }
 
-  _createElementPropertyRecords(bindings: List<BindingRecord>, boundElementIndex: number,
+  _createElementPropertyRecords(bindings: BindingRecord[], boundElementIndex: number,
                                 renderElementBinder: RenderElementBinder) {
     ListWrapper.forEach(renderElementBinder.propertyBindings, (binding) => {
       if (binding.type === PropertyBindingType.PROPERTY) {
@@ -127,9 +127,9 @@ export class BindingRecordsCreator {
     });
   }
 
-  _createDirectiveRecords(bindings: List<BindingRecord>, boundElementIndex: number,
-                          directiveBinders: List<DirectiveBinder>,
-                          allDirectiveMetadatas: List<RenderDirectiveMetadata>) {
+  _createDirectiveRecords(bindings: BindingRecord[], boundElementIndex: number,
+                          directiveBinders: DirectiveBinder[],
+                          allDirectiveMetadatas: RenderDirectiveMetadata[]) {
     for (var i = 0; i < directiveBinders.length; i++) {
       var directiveBinder = directiveBinders[i];
       var directiveMetadata = allDirectiveMetadatas[directiveBinder.directiveIndex];
@@ -205,7 +205,7 @@ export class ProtoViewFactory {
   constructor(public _changeDetection: ChangeDetection) {}
 
   createAppProtoViews(hostComponentBinding: DirectiveBinding, rootRenderProtoView: ProtoViewDto,
-                      allDirectives: List<DirectiveBinding>, pipes: PipeBinding[]): AppProtoView[] {
+                      allDirectives: DirectiveBinding[], pipes: PipeBinding[]): AppProtoView[] {
     var allRenderDirectiveMetadata =
         ListWrapper.map(allDirectives, directiveBinding => directiveBinding.metadata);
     var nestedPvsWithIndex = _collectNestedProtoViews(rootRenderProtoView);
@@ -255,8 +255,8 @@ export class ProtoViewFactory {
  */
 export function getChangeDetectorDefinitions(
     hostComponentMetadata: RenderDirectiveMetadata, rootRenderProtoView: ProtoViewDto,
-    allRenderDirectiveMetadata: List<RenderDirectiveMetadata>, genConfig: ChangeDetectorGenConfig):
-    List<ChangeDetectorDefinition> {
+    allRenderDirectiveMetadata: RenderDirectiveMetadata[], genConfig: ChangeDetectorGenConfig):
+    ChangeDetectorDefinition[] {
   var nestedPvsWithIndex = _collectNestedProtoViews(rootRenderProtoView);
   var nestedPvVariableNames = _collectNestedProtoViewsVariableNames(nestedPvsWithIndex);
   return _getChangeDetectorDefinitions(hostComponentMetadata, nestedPvsWithIndex,
@@ -266,7 +266,7 @@ export function getChangeDetectorDefinitions(
 
 function _collectNestedProtoViews(
     renderProtoView: ProtoViewDto, parentIndex: number = null, boundElementIndex = null,
-    result: List<RenderProtoViewWithIndex> = null): List<RenderProtoViewWithIndex> {
+    result: RenderProtoViewWithIndex> = null): List<RenderProtoViewWithIndex[] {
   if (isBlank(result)) {
     result = [];
   }
@@ -287,9 +287,9 @@ function _collectNestedProtoViews(
 
 function _getChangeDetectorDefinitions(
     hostComponentMetadata: RenderDirectiveMetadata,
-    nestedPvsWithIndex: List<RenderProtoViewWithIndex>, nestedPvVariableNames: List<List<string>>,
-    allRenderDirectiveMetadata: List<RenderDirectiveMetadata>, genConfig: ChangeDetectorGenConfig):
-    List<ChangeDetectorDefinition> {
+    nestedPvsWithIndex: RenderProtoViewWithIndex>, nestedPvVariableNames: List<List<string>[],
+    allRenderDirectiveMetadata: RenderDirectiveMetadata[], genConfig: ChangeDetectorGenConfig):
+    ChangeDetectorDefinition[] {
   return ListWrapper.map(nestedPvsWithIndex, (pvWithIndex) => {
     var elementBinders = pvWithIndex.renderProtoView.elementBinders;
     var bindingRecordsCreator = new BindingRecordsCreator();
@@ -311,7 +311,7 @@ function _getChangeDetectorDefinitions(
 }
 
 function _getChangeDetectorDefinitionIds(hostComponentMetadata: RenderDirectiveMetadata,
-                                         nestedPvsWithIndex: List<RenderProtoViewWithIndex>):
+                                         nestedPvsWithIndex: RenderProtoViewWithIndex[]):
     string[] {
   return nestedPvsWithIndex.map(pvWithIndex => _protoViewId(hostComponentMetadata, pvWithIndex));
 }
@@ -331,7 +331,7 @@ function _protoViewId(hostComponentMetadata: RenderDirectiveMetadata,
 
 function _createAppProtoView(
     renderProtoView: ProtoViewDto, protoChangeDetector: ProtoChangeDetector,
-    variableBindings: Map<string, string>, allDirectives: List<DirectiveBinding>,
+    variableBindings: Map<string, string>, allDirectives: DirectiveBinding[],
     pipes: PipeBinding[]): AppProtoView {
   var elementBinders = renderProtoView.elementBinders;
   // Embedded ProtoViews that contain `<ng-content>` will be merged into their parents and use
@@ -346,7 +346,7 @@ function _createAppProtoView(
 }
 
 function _collectNestedProtoViewsVariableBindings(
-    nestedPvsWithIndex: List<RenderProtoViewWithIndex>): List<Map<string, string>> {
+    nestedPvsWithIndex: RenderProtoViewWithIndex>): List<Map<string, string>[] {
   return ListWrapper.map(nestedPvsWithIndex, (pvWithIndex) => {
     return _createVariableBindings(pvWithIndex.renderProtoView);
   });
@@ -359,8 +359,8 @@ function _createVariableBindings(renderProtoView): Map<string, string> {
   return variableBindings;
 }
 
-function _collectNestedProtoViewsVariableNames(nestedPvsWithIndex: List<RenderProtoViewWithIndex>):
-    List<List<string>> {
+function _collectNestedProtoViewsVariableNames(nestedPvsWithIndex: RenderProtoViewWithIndex[]):
+    List<string>[] {
   var nestedPvVariableNames = ListWrapper.createFixedSize(nestedPvsWithIndex.length);
   ListWrapper.forEach(nestedPvsWithIndex, (pvWithIndex) => {
     var parentVariableNames =
@@ -371,9 +371,9 @@ function _collectNestedProtoViewsVariableNames(nestedPvsWithIndex: List<RenderPr
   return nestedPvVariableNames;
 }
 
-function _createVariableNames(parentVariableNames: List<string>, renderProtoView): List<string> {
+function _createVariableNames(parentVariableNames: string>, renderProtoView): List<string[] {
   var res =
-      isBlank(parentVariableNames) ? <List<string>>[] : ListWrapper.clone(parentVariableNames);
+      isBlank(parentVariableNames) ? <string>[][] : ListWrapper.clone(parentVariableNames);
   MapWrapper.forEach(renderProtoView.variableBindings,
                      (mappedName, varName) => { res.push(mappedName); });
   ListWrapper.forEach(renderProtoView.elementBinders, binder => {
@@ -383,7 +383,7 @@ function _createVariableNames(parentVariableNames: List<string>, renderProtoView
   return res;
 }
 
-export function createVariableLocations(elementBinders: List<RenderElementBinder>):
+export function createVariableLocations(elementBinders: RenderElementBinder[]):
     Map<string, number> {
   var variableLocations = new Map();
   for (var i = 0; i < elementBinders.length; i++) {
@@ -477,7 +477,7 @@ function _createElementBinder(protoView: AppProtoView, boundElementIndex, render
 }
 
 export function createDirectiveVariableBindings(renderElementBinder: RenderElementBinder,
-                                                directiveBindings: List<DirectiveBinding>):
+                                                directiveBindings: DirectiveBinding[]):
     Map<string, number> {
   var directiveVariableBindings = new Map();
   MapWrapper.forEach(renderElementBinder.variableBindings, (templateName, exportAs) => {

@@ -40,7 +40,7 @@ import {Instruction, stringifyInstruction} from './instruction';
   host: {'(^click)': 'onClick()', '[attr.href]': 'visibleHref'}
 })
 export class RouterLink {
-  private _routeParams: List<any>;
+  private _routeParams: any[];
 
   // the url displayed on the anchor element.
   visibleHref: string;
@@ -50,7 +50,7 @@ export class RouterLink {
 
   constructor(private _router: Router, private _location: Location) {}
 
-  set routeParams(changes: List<any>) {
+  set routeParams(changes: any[]) {
     this._routeParams = changes;
     this._navigationInstruction = this._router.generate(this._routeParams);
 

@@ -493,16 +493,16 @@ class InertDirective {
 })
 @Injectable()
 class NeedsQuery {
-  query: QueryList<TextDirective>;
-  constructor(@Query(TextDirective) query: QueryList<TextDirective>) { this.query = query; }
+  query: QueryTextDirective[];
+  constructor(@Query(TextDirective) query: QueryTextDirective[]) { this.query = query; }
 }
 
 @Component({selector: 'needs-query-desc'})
 @View({directives: [NgFor], template: '<div *ng-for="var dir of query">{{dir.text}}|</div>'})
 @Injectable()
 class NeedsQueryDesc {
-  query: QueryList<TextDirective>;
-  constructor(@Query(TextDirective, {descendants: true}) query: QueryList<TextDirective>) {
+  query: QueryTextDirective[];
+  constructor(@Query(TextDirective, {descendants: true}) query: QueryTextDirective[]) {
     this.query = query;
   }
 }
@@ -511,8 +511,8 @@ class NeedsQueryDesc {
 @View({directives: [], template: '<ng-content>'})
 @Injectable()
 class NeedsQueryByLabel {
-  query: QueryList<any>;
-  constructor(@Query("textLabel", {descendants: true}) query: QueryList<any>) {
+  query: Queryany[];
+  constructor(@Query("textLabel", {descendants: true}) query: Queryany[]) {
     this.query = query;
   }
 }
@@ -521,8 +521,8 @@ class NeedsQueryByLabel {
 @View({directives: [], template: '<ng-content>'})
 @Injectable()
 class NeedsQueryByTwoLabels {
-  query: QueryList<any>;
-  constructor(@Query("textLabel1,textLabel2", {descendants: true}) query: QueryList<any>) {
+  query: Queryany[];
+  constructor(@Query("textLabel1,textLabel2", {descendants: true}) query: Queryany[]) {
     this.query = query;
   }
 }
@@ -534,8 +534,8 @@ class NeedsQueryByTwoLabels {
 })
 @Injectable()
 class NeedsQueryAndProject {
-  query: QueryList<TextDirective>;
-  constructor(@Query(TextDirective) query: QueryList<TextDirective>) { this.query = query; }
+  query: QueryTextDirective[];
+  constructor(@Query(TextDirective) query: QueryTextDirective[]) { this.query = query; }
 }
 
 @Component({selector: 'needs-view-query'})
@@ -546,8 +546,8 @@ class NeedsQueryAndProject {
 })
 @Injectable()
 class NeedsViewQuery {
-  query: QueryList<TextDirective>;
-  constructor(@ViewQuery(TextDirective) query: QueryList<TextDirective>) { this.query = query; }
+  query: QueryTextDirective[];
+  constructor(@ViewQuery(TextDirective) query: QueryTextDirective[]) { this.query = query; }
 }
 
 @Component({selector: 'needs-view-query-desc'})
@@ -558,8 +558,8 @@ class NeedsViewQuery {
 })
 @Injectable()
 class NeedsViewQueryDesc {
-  query: QueryList<TextDirective>;
-  constructor(@ViewQuery(TextDirective, {descendants: true}) query: QueryList<TextDirective>) {
+  query: QueryTextDirective[];
+  constructor(@ViewQuery(TextDirective, {descendants: true}) query: QueryTextDirective[]) {
     this.query = query;
   }
 }
@@ -569,8 +569,8 @@ class NeedsViewQueryDesc {
 @Injectable()
 class NeedsViewQueryIf {
   show: boolean;
-  query: QueryList<TextDirective>;
-  constructor(@ViewQuery(TextDirective) query: QueryList<TextDirective>) {
+  query: QueryTextDirective[];
+  constructor(@ViewQuery(TextDirective) query: QueryTextDirective[]) {
     this.query = query;
     this.show = false;
   }
@@ -585,8 +585,8 @@ class NeedsViewQueryIf {
 @Injectable()
 class NeedsViewQueryNestedIf {
   show: boolean;
-  query: QueryList<TextDirective>;
-  constructor(@ViewQuery(TextDirective) query: QueryList<TextDirective>) {
+  query: QueryTextDirective[];
+  constructor(@ViewQuery(TextDirective) query: QueryTextDirective[]) {
     this.query = query;
     this.show = true;
   }
@@ -604,9 +604,9 @@ class NeedsViewQueryNestedIf {
 })
 @Injectable()
 class NeedsViewQueryOrder {
-  query: QueryList<TextDirective>;
+  query: QueryTextDirective[];
   list: string[];
-  constructor(@ViewQuery(TextDirective, {descendants: true}) query: QueryList<TextDirective>) {
+  constructor(@ViewQuery(TextDirective, {descendants: true}) query: QueryTextDirective[]) {
     this.query = query;
     this.list = ['2', '3'];
   }
@@ -615,10 +615,10 @@ class NeedsViewQueryOrder {
 @Component({selector: 'needs-tpl'})
 @View({template: '<template var-x="shadow"></template>'})
 class NeedsTpl {
-  viewQuery: QueryList<TemplateRef>;
-  query: QueryList<TemplateRef>;
-  constructor(@ViewQuery(TemplateRef) viewQuery: QueryList<TemplateRef>,
-              @Query(TemplateRef) query: QueryList<TemplateRef>) {
+  viewQuery: QueryTemplateRef[];
+  query: QueryTemplateRef[];
+  constructor(@ViewQuery(TemplateRef) viewQuery: QueryTemplateRef[],
+              @Query(TemplateRef) query: QueryTemplateRef[]) {
     this.viewQuery = viewQuery;
     this.query = query;
   }

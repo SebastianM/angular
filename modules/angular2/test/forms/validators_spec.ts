@@ -32,6 +32,11 @@ export function main() {
          () => { expect(Validators.required(new Control("not empty"))).toEqual(null); });
     });
 
+    describe("minlength", () => {
+    it("should not error on empty string (as this is handled by required)", () =>
+      expect(Validators.minLength(new Control(""), 10)).toEqual(null);
+    })
+
     describe("compose", () => {
       it("should collect errors from all the validators", () => {
         var c = Validators.compose([validator("a", true), validator("b", true)]);

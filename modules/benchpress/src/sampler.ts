@@ -21,7 +21,7 @@ import {MeasureValues} from './measure_values';
  */
 export class Sampler {
   // TODO(tbosch): use static values when our transpiler supports them
-  static get BINDINGS(): List<Binding> { return _BINDINGS; }
+  static get BINDINGS(): Binding[] { return _BINDINGS; }
 
   _driver: WebDriverAdapter;
   _metric: Metric;
@@ -92,7 +92,7 @@ export class Sampler {
 }
 
 export class SampleState {
-  constructor(public completeSample: List<any>, public validSample: List<any>) {}
+  constructor(public completeSample: any>, public validSample: List<any[]) {}
 }
 
 var _BINDINGS = [

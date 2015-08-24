@@ -18,10 +18,10 @@ import {ON_PUSH_OBSERVE} from './constants';
 import {ProtoRecord, RecordType} from './proto_record';
 
 export class DynamicChangeDetector extends AbstractChangeDetector<any> {
-  values: List<any>;
-  changes: List<any>;
-  localPipes: List<any>;
-  prevContexts: List<any>;
+  values: any[];
+  changes: any[];
+  localPipes: any[];
+  prevContexts: any[];
   directives: any = null;
 
   constructor(id: string, dispatcher: any, numberOfPropertyProtoRecords: number,

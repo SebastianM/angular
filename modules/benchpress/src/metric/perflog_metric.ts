@@ -20,11 +20,11 @@ import {Options} from '../common_options';
  */
 export class PerflogMetric extends Metric {
   // TODO(tbosch): use static values when our transpiler supports them
-  static get BINDINGS(): List<Binding> { return _BINDINGS; }
+  static get BINDINGS(): Binding[] { return _BINDINGS; }
   // TODO(tbosch): use static values when our transpiler supports them
   static get SET_TIMEOUT(): OpaqueToken { return _SET_TIMEOUT; }
 
-  private _remainingEvents: List<StringMap<string, any>>;
+  private _remainingEvents: StringMap<string, any>[];
   private _measureCount: number;
   _perfLogFeatures: PerfLogFeatures;
 
@@ -171,7 +171,7 @@ export class PerflogMetric extends Metric {
     }
   }
 
-  _aggregateEvents(events: List<StringMap<string, any>>, markName): StringMap<string, any> {
+  _aggregateEvents(events: StringMap<string, any>>, markName): StringMap<string, any[] {
     var result = {'scriptTime': 0, 'pureScriptTime': 0};
     if (this._perfLogFeatures.gc) {
       result['gcTime'] = 0;

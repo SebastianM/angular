@@ -27,7 +27,7 @@ export {
   SelectControlValueAccessor,
   NgSelectOption
 } from './directives/select_control_value_accessor';
-export {NgValidator, NgRequiredValidator} from './directives/validators';
+export {NgValidator, NgRequiredValidator, NgMinLengthValidator, NgMaxLengthValidator} from './directives/validators';
 
 /**
  *
@@ -35,7 +35,7 @@ export {NgValidator, NgRequiredValidator} from './directives/validators';
  *
  *  This is a shorthand for importing them each individually.
  */
-export const FORM_DIRECTIVES: List<Type> = CONST_EXPR([
+export const FORM_DIRECTIVES: Type[] = CONST_EXPR([
   NgControlName,
   NgControlGroup,
 
@@ -49,5 +49,7 @@ export const FORM_DIRECTIVES: List<Type> = CONST_EXPR([
   CheckboxControlValueAccessor,
   SelectControlValueAccessor,
 
-  NgRequiredValidator
+  NgRequiredValidator,
+  NgMinLengthValidator,
+  NgMaxLengthValidator
 ]);

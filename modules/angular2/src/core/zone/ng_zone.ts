@@ -45,7 +45,7 @@ export class NgZone {
 
   _inVmTurnDone: boolean = false;
 
-  _pendingTimeouts: List<number> = [];
+  _pendingTimeouts: number[] = [];
 
   /**
    * Associates with this

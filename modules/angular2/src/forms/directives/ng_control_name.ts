@@ -84,12 +84,12 @@ export class NgControlName extends NgControl {
   update = new EventEmitter();
   model: any;
   viewModel: any;
-  ngValidators: QueryList<NgValidator>;
+  ngValidators: QueryNgValidator[];
   _added = false;
 
   // Scope the query once https://github.com/angular/angular/issues/2603 is fixed
   constructor(@Host() @SkipSelf() parent: ControlContainer,
-              @Query(NgValidator) ngValidators: QueryList<NgValidator>) {
+              @Query(NgValidator) ngValidators: QueryNgValidator[]) {
     super();
     this._parent = parent;
     this.ngValidators = ngValidators;
@@ -113,7 +113,7 @@ export class NgControlName extends NgControl {
     ObservableWrapper.callNext(this.update, newValue);
   }
 
-  get path(): List<string> { return controlPath(this.name, this._parent); }
+  get path(): string[] { return controlPath(this.name, this._parent); }
 
   get formDirective(): any { return this._parent.formDirective; }
 

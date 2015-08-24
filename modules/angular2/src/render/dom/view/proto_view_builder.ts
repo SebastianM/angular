@@ -43,7 +43,7 @@ import {
 
 export class ProtoViewBuilder {
   variableBindings: Map<string, string> = new Map();
-  elements: List<ElementBinderBuilder> = [];
+  elements: ElementBinderBuilder[] = [];
   rootTextBindings: Map<Node, ASTWithSource> = new Map();
   ngContentCount: number = 0;
   hostAttributes: Map<string, string> = new Map();
@@ -157,11 +157,11 @@ export class ProtoViewBuilder {
 export class ElementBinderBuilder {
   parent: ElementBinderBuilder = null;
   distanceToParent: number = 0;
-  directives: List<DirectiveBuilder> = [];
+  directives: DirectiveBuilder[] = [];
   nestedProtoView: ProtoViewBuilder = null;
   propertyBindings: Map<string, ASTWithSource> = new Map();
   variableBindings: Map<string, string> = new Map();
-  eventBindings: List<EventBinding> = [];
+  eventBindings: EventBinding[] = [];
   eventBuilder: EventBuilder = new EventBuilder();
   textBindings: Map<Node, ASTWithSource> = new Map();
   readAttributes: Map<string, string> = new Map();
@@ -237,9 +237,9 @@ export class DirectiveBuilder {
   // mapping from directive property name to AST for that directive
   propertyBindings: Map<string, ASTWithSource> = new Map();
   // property names used in the template
-  templatePropertyNames: List<string> = [];
+  templatePropertyNames: string[] = [];
   hostPropertyBindings: Map<string, ASTWithSource> = new Map();
-  eventBindings: List<EventBinding> = [];
+  eventBindings: EventBinding[] = [];
   eventBuilder: EventBuilder = new EventBuilder();
 
   constructor(public directiveIndex: number) {}
@@ -263,9 +263,9 @@ export class DirectiveBuilder {
 }
 
 class EventBuilder extends AstTransformer {
-  locals: List<AST> = [];
-  localEvents: List<Event> = [];
-  globalEvents: List<Event> = [];
+  locals: AST[] = [];
+  localEvents: Event[] = [];
+  globalEvents: Event[] = [];
   _implicitReceiver: AST = new ImplicitReceiver();
 
   constructor() { super(); }
@@ -307,11 +307,11 @@ class EventBuilder extends AstTransformer {
     }
   }
 
-  buildEventLocals(): List<AST> { return this.locals; }
+  buildEventLocals(): AST[] { return this.locals; }
 
-  buildLocalEvents(): List<Event> { return this.localEvents; }
+  buildLocalEvents(): Event[] { return this.localEvents; }
 
-  buildGlobalEvents(): List<Event> { return this.globalEvents; }
+  buildGlobalEvents(): Event[] { return this.globalEvents; }
 
   merge(eventBuilder: EventBuilder) {
     this._merge(this.localEvents, eventBuilder.localEvents);
@@ -319,7 +319,7 @@ class EventBuilder extends AstTransformer {
     ListWrapper.concat(this.locals, eventBuilder.locals);
   }
 
-  _merge(host: List<Event>, tobeAdded: List<Event>) {
+  _merge(host: Event>, tobeAdded: List<Event[]) {
     var names = [];
     for (var i = 0; i < host.length; i++) {
       names.push(host[i].fullName);
@@ -340,7 +340,7 @@ const STYLE_PREFIX = 'style';
 function buildElementPropertyBindings(
     schemaRegistry: ElementSchemaRegistry, protoElement: /*element*/ any, isNgComponent: boolean,
     bindingsInTemplate: Map<string, ASTWithSource>, directiveTemplatePropertyNames: Set<string>):
-    List<ElementPropertyBinding> {
+    ElementPropertyBinding[] {
   var propertyBindings = [];
 
   MapWrapper.forEach(bindingsInTemplate, (ast, propertyNameInTemplate) => {

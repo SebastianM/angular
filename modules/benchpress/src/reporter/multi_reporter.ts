@@ -6,7 +6,7 @@ import {MeasureValues} from '../measure_values';
 import {Reporter} from '../reporter';
 
 export class MultiReporter extends Reporter {
-  static createBindings(childTokens: List<any>): List<Binding> {
+  static createBindings(childTokens: any>): List<Binding[] {
     return [
       bind(_CHILDREN)
           .toFactory(
@@ -16,20 +16,20 @@ export class MultiReporter extends Reporter {
     ];
   }
 
-  _reporters: List<Reporter>;
+  _reporters: Reporter[];
 
   constructor(reporters) {
     super();
     this._reporters = reporters;
   }
 
-  reportMeasureValues(values: MeasureValues): Promise<List<any>> {
+  reportMeasureValues(values: MeasureValues): Promise<any>[] {
     return PromiseWrapper.all(
         ListWrapper.map(this._reporters, (reporter) => reporter.reportMeasureValues(values)));
   }
 
-  reportSample(completeSample: List<MeasureValues>,
-               validSample: List<MeasureValues>): Promise<List<any>> {
+  reportSample(completeSample: MeasureValues[],
+               validSample: MeasureValues>): Promise<List<any>[] {
     return PromiseWrapper.all(ListWrapper.map(
         this._reporters, (reporter) => reporter.reportSample(completeSample, validSample)));
   }

@@ -18,13 +18,13 @@ var _allViewsById = new Map<number, AppView>();
 
 var _nextId = 0;
 
-function _setElementId(element, indices: List<number>) {
+function _setElementId(element, indices: number[]) {
   if (isPresent(element)) {
     DOM.setData(element, NG_ID_PROPERTY, ListWrapper.join(indices, NG_ID_SEPARATOR));
   }
 }
 
-function _getElementId(element): List<number> {
+function _getElementId(element): number[] {
   var elId = DOM.getData(element, NG_ID_PROPERTY);
   if (isPresent(elId)) {
     return ListWrapper.map(elId.split(NG_ID_SEPARATOR),

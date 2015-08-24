@@ -9,10 +9,10 @@ import {Options} from './common_options';
  */
 export class SampleDescription {
   // TODO(tbosch): use static values when our transpiler supports them
-  static get BINDINGS(): List<Binding> { return _BINDINGS; }
+  static get BINDINGS(): Binding[] { return _BINDINGS; }
   description: StringMap<string, any>;
 
-  constructor(public id: string, descriptions: List<StringMap<string, any>>,
+  constructor(public id: string, descriptions: StringMap<string, any>[],
               public metrics: StringMap<string, any>) {
     this.description = {};
     ListWrapper.forEach(descriptions, (description) => {

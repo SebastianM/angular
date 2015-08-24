@@ -35,7 +35,7 @@ export class ViewLoader {
 
   load(viewDef: ViewDefinition): Promise<TemplateAndStyles> {
     var r = wtfStartTimeRange('ViewLoader#load()', stringify(viewDef.componentId));
-    let tplAndStyles: List<Promise<TemplateAndStyles>| Promise<string>| string> =
+    let tplAndStyles: Promise<TemplateAndStyles>| Promise<string>| string[] =
         [this._loadHtml(viewDef.template, viewDef.templateAbsUrl, viewDef.componentId)];
     if (isPresent(viewDef.styles)) {
       viewDef.styles.forEach((cssText: string) => {
@@ -54,7 +54,7 @@ export class ViewLoader {
 
     // Inline the styles from the @View annotation
     return PromiseWrapper.all(tplAndStyles)
-        .then((res: List<TemplateAndStyles | string>) => {
+        .then((res: TemplateAndStyles | string>) =[] {
           let loadedTplAndStyles = <TemplateAndStyles>res[0];
           let styles = <string[]>ListWrapper.slice(res, 1);
 

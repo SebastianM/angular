@@ -80,7 +80,7 @@ export class ChangeDetectorGenConfig {
 }
 
 export class ChangeDetectorDefinition {
-  constructor(public id: string, public strategy: string, public variableNames: List<string>,
+  constructor(public id: string, public strategy: string, public variableNames: string[],
               public bindingRecords: BindingRecord[], public eventRecords: BindingRecord[],
               public directiveRecords: DirectiveRecord[],
               public genConfig: ChangeDetectorGenConfig) {}

@@ -154,7 +154,7 @@ function _getAppBindings() {
   ];
 }
 
-export function createTestInjector(bindings: List<Type | Binding | List<any>>): Injector {
+export function createTestInjector(bindings: Type | Binding | List<any>[]): Injector {
   var rootInjector = Injector.resolveAndCreate(_getRootBindings());
   return rootInjector.resolveAndCreateChild(ListWrapper.concat(_getAppBindings(), bindings));
 }
@@ -188,15 +188,15 @@ export function createTestInjector(bindings: List<Type | Binding | List<any>>): 
  * @param {Function} fn
  * @return {FunctionWithParamTokens}
  */
-export function inject(tokens: List<any>, fn: Function): FunctionWithParamTokens {
+export function inject(tokens: any[], fn: Function): FunctionWithParamTokens {
   return new FunctionWithParamTokens(tokens, fn);
 }
 
 export class FunctionWithParamTokens {
-  _tokens: List<any>;
+  _tokens: any[];
   _fn: Function;
 
-  constructor(tokens: List<any>, fn: Function) {
+  constructor(tokens: any[], fn: Function) {
     this._tokens = tokens;
     this._fn = fn;
   }

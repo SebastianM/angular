@@ -74,7 +74,7 @@ function inverseIndexMapping(input: number[], resultLength: number): number[] {
 
 export class AppViewContainer {
   // The order in this list matches the DOM order.
-  views: List<AppView> = [];
+  views: AppView[] = [];
 }
 
 /**
@@ -85,26 +85,26 @@ export class AppView implements ChangeDispatcher, RenderEventDispatcher {
   // AppViews that have been merged in depth first order.
   // This list is shared between all merged views. Use this.elementOffset to get the local
   // entries.
-  views: List<AppView> = null;
+  views: AppView[] = null;
   // root elementInjectors of this AppView
   // This list is local to this AppView and not shared with other Views.
-  rootElementInjectors: List<ElementInjector>;
+  rootElementInjectors: ElementInjector[];
   // ElementInjectors of all AppViews in views grouped by view.
   // This list is shared between all merged views. Use this.elementOffset to get the local
   // entries.
-  elementInjectors: List<ElementInjector> = null;
+  elementInjectors: ElementInjector[] = null;
   // ViewContainers of all AppViews in views grouped by view.
   // This list is shared between all merged views. Use this.elementOffset to get the local
   // entries.
-  viewContainers: List<AppViewContainer> = null;
+  viewContainers: AppViewContainer[] = null;
   // PreBuiltObjects of all AppViews in views grouped by view.
   // This list is shared between all merged views. Use this.elementOffset to get the local
   // entries.
-  preBuiltObjects: List<PreBuiltObjects> = null;
+  preBuiltObjects: PreBuiltObjects[] = null;
   // ElementRef of all AppViews in views grouped by view.
   // This list is shared between all merged views. Use this.elementOffset to get the local
   // entries.
-  elementRefs: List<ElementRef>;
+  elementRefs: ElementRef[];
 
   ref: ViewRef;
   changeDetector: ChangeDetector = null;
@@ -134,10 +134,10 @@ export class AppView implements ChangeDispatcher, RenderEventDispatcher {
     this.locals = new Locals(null, MapWrapper.clone(protoLocals));  // TODO optimize this
   }
 
-  init(changeDetector: ChangeDetector, elementInjectors: List<ElementInjector>,
-       rootElementInjectors: List<ElementInjector>, preBuiltObjects: List<PreBuiltObjects>,
-       views: List<AppView>, elementRefs: List<ElementRef>,
-       viewContainers: List<AppViewContainer>) {
+  init(changeDetector: ChangeDetector, elementInjectors: ElementInjector[],
+       rootElementInjectors: ElementInjector>, preBuiltObjects: List<PreBuiltObjects[],
+       views: AppView>, elementRefs: List<ElementRef[],
+       viewContainers: AppViewContainer[]) {
     this.changeDetector = changeDetector;
     this.elementInjectors = elementInjectors;
     this.rootElementInjectors = rootElementInjectors;
@@ -256,7 +256,7 @@ export class AppView implements ChangeDispatcher, RenderEventDispatcher {
     return isPresent(childView) ? childView.changeDetector : null;
   }
 
-  invokeElementMethod(elementIndex: number, methodName: string, args: List<any>) {
+  invokeElementMethod(elementIndex: number, methodName: string, args: any[]) {
     this.renderer.invokeElementMethod(this.elementRefs[elementIndex], methodName, args);
   }
 
@@ -321,7 +321,7 @@ class EventEvaluationError extends BaseException {
  *
  */
 export class AppProtoView {
-  elementBinders: List<ElementBinder> = [];
+  elementBinders: ElementBinder[] = [];
   protoLocals: Map<string, any> = new Map();
   mergeMapping: AppProtoViewMergeMapping;
   ref: ProtoViewRef;

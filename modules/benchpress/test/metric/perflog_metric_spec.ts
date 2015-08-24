@@ -641,7 +641,7 @@ export function main() {
 }
 
 class MockDriverExtension extends WebDriverExtension {
-  constructor(private _perfLogs: List<any>, private _commandLog: List<any>,
+  constructor(private _perfLogs: any>, private _commandLog: List<any[],
               private _perfLogFeatures: PerfLogFeatures) {
     super();
   }

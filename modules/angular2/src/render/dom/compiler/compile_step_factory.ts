@@ -9,14 +9,14 @@ import {ViewSplitter} from './view_splitter';
 import {StyleEncapsulator} from './style_encapsulator';
 
 export class CompileStepFactory {
-  createSteps(view: ViewDefinition): List<CompileStep> { return null; }
+  createSteps(view: ViewDefinition): CompileStep[] { return null; }
 }
 
 export class DefaultStepFactory extends CompileStepFactory {
   private _componentUIDsCache: Map<string, string> = new Map();
   constructor(private _parser: Parser, private _appId: string) { super(); }
 
-  createSteps(view: ViewDefinition): List<CompileStep> {
+  createSteps(view: ViewDefinition): CompileStep[] {
     return [
       new ViewSplitter(this._parser),
       new PropertyBindingParser(this._parser),

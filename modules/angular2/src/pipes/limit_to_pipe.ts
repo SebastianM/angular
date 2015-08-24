@@ -59,7 +59,7 @@ import {Pipe} from '../core/metadata';
 export class LimitToPipe implements PipeTransform {
   supports(obj: any): boolean { return isString(obj) || isArray(obj); }
 
-  transform(value: any, args: List<any> = null): any {
+  transform(value: any, args: any[] = null): any {
     if (isBlank(args) || args.length == 0) {
       throw new BaseException('limitTo pipe requires one argument');
     }

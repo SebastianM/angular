@@ -28,12 +28,12 @@ function _getParser() {
   return _parser;
 }
 
-function _createBindingRecords(expression: string): List<BindingRecord> {
+function _createBindingRecords(expression: string): BindingRecord[] {
   var ast = _getParser().parseBinding(expression, 'location');
   return [BindingRecord.createForElementProperty(ast, 0, PROP_NAME)];
 }
 
-function _createEventRecords(expression: string): List<BindingRecord> {
+function _createEventRecords(expression: string): BindingRecord[] {
   var eq = expression.indexOf("=");
   var eventName = expression.substring(1, eq - 1);
   var exp = expression.substring(eq + 2, expression.length - 1);
@@ -42,7 +42,7 @@ function _createEventRecords(expression: string): List<BindingRecord> {
 }
 
 function _createHostEventRecords(expression: string, directiveRecord: DirectiveRecord):
-    List<BindingRecord> {
+    BindingRecord[] {
   var parts = expression.split("=");
   var eventName = parts[0].substring(1, parts[0].length - 1);
   var exp = parts[1].substring(1, parts[1].length - 1);
@@ -51,7 +51,7 @@ function _createHostEventRecords(expression: string, directiveRecord: DirectiveR
   return [BindingRecord.createForHostEvent(ast, eventName, directiveRecord)];
 }
 
-function _convertLocalsToVariableBindings(locals: Locals): List<any> {
+function _convertLocalsToVariableBindings(locals: Locals): any[] {
   var variableBindings = [];
   var loc = locals;
   while (isPresent(loc) && isPresent(loc.current)) {
@@ -142,7 +142,7 @@ export class TestDefinition {
  * Get all available ChangeDetectorDefinition objects. Used to pre-generate Dart
  * `ChangeDetector` classes.
  */
-export function getAllDefinitions(): List<TestDefinition> {
+export function getAllDefinitions(): TestDefinition[] {
   var allDefs = _availableDefinitions;
   allDefs = ListWrapper.concat(allDefs,
                                StringMapWrapper.keys(_ExpressionWithLocals.availableDefinitions));
@@ -249,8 +249,8 @@ class _ExpressionWithMode {
 }
 
 class _DirectiveUpdating {
-  constructor(private _bindingRecords: List<BindingRecord>,
-              private _directiveRecords: List<DirectiveRecord>) {}
+  constructor(private _bindingRecords: BindingRecord[],
+              private _directiveRecords: DirectiveRecord[]) {}
 
   createChangeDetectorDefinition(): ChangeDetectorDefinition {
     var strategy = null;
@@ -272,7 +272,7 @@ class _DirectiveUpdating {
                                             (o, v) => (<any>o).b = v, dirRecord);
   }
 
-  static basicRecords: List<DirectiveRecord> = [
+  static basicRecords: DirectiveRecord[] = [
     new DirectiveRecord({
       directiveIndex: new DirectiveIndex(0, 0),
       callOnChange: true,

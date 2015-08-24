@@ -18,7 +18,7 @@ export class Validator {
   /**
    * Calculates a valid sample out of the complete sample
    */
-  validate(completeSample: List<MeasureValues>): List<MeasureValues> {
+  validate(completeSample: MeasureValues>): List<MeasureValues[] {
     throw new BaseException('NYI');
   }
 

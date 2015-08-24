@@ -42,9 +42,9 @@ export class DebugElement {
   /**
    * Get child DebugElements from within the Light DOM.
    *
-   * @return {List<DebugElement>}
+   * @return {DebugElement[]}
    */
-  get children(): List<DebugElement> {
+  get children(): DebugElement[] {
     return this._getChildElements(this._parentView, this._boundElementIndex);
   }
 
@@ -52,9 +52,9 @@ export class DebugElement {
    * Get the root DebugElement children of a component. Returns an empty
    * list if the current DebugElement is not a component root.
    *
-   * @return {List<DebugElement>}
+   * @return {DebugElement[]}
    */
-  get componentViewChildren(): List<DebugElement> {
+  get componentViewChildren(): DebugElement[] {
     var shadowView = this._parentView.getNestedView(this._boundElementIndex);
 
     if (!isPresent(shadowView)) {
@@ -106,15 +106,15 @@ export class DebugElement {
    * @param {Function: boolean} predicate
    * @param {Scope} scope
    *
-   * @return {List<DebugElement>}
+   * @return {DebugElement[]}
    */
-  queryAll(predicate: Predicate<DebugElement>, scope: Function = Scope.all): List<DebugElement> {
+  queryAll(predicate: Predicate<DebugElement>, scope: Function = Scope.all): DebugElement[] {
     var elementsInScope = scope(this);
 
     return ListWrapper.filter(elementsInScope, predicate);
   }
 
-  _getChildElements(view: AppView, parentBoundElementIndex: number): List<DebugElement> {
+  _getChildElements(view: AppView, parentBoundElementIndex: number): DebugElement[] {
     var els = [];
     var parentElementBinder = null;
     if (isPresent(parentBoundElementIndex)) {
@@ -141,12 +141,12 @@ export function inspectElement(elementRef: ElementRef): DebugElement {
   return DebugElement.create(elementRef);
 }
 
-export function asNativeElements(arr: List<DebugElement>): List<any> {
+export function asNativeElements(arr: DebugElement>): List<any[] {
   return arr.map((debugEl) => debugEl.nativeElement);
 }
 
 export class Scope {
-  static all(debugElement: DebugElement): List<DebugElement> {
+  static all(debugElement: DebugElement): DebugElement[] {
     var scope = [];
     scope.push(debugElement);
 
@@ -158,7 +158,7 @@ export class Scope {
 
     return scope;
   }
-  static light(debugElement: DebugElement): List<DebugElement> {
+  static light(debugElement: DebugElement): DebugElement[] {
     var scope = [];
     ListWrapper.forEach(debugElement.children, (child) => {
       scope.push(child);
@@ -167,7 +167,7 @@ export class Scope {
     return scope;
   }
 
-  static view(debugElement: DebugElement): List<DebugElement> {
+  static view(debugElement: DebugElement): DebugElement[] {
     var scope = [];
 
     ListWrapper.forEach(debugElement.componentViewChildren, (child) => {

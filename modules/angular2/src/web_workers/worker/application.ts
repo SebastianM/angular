@@ -27,7 +27,7 @@ var _postMessage: PostMessageInterface = <any>postMessage;
  * See the bootstrap() docs for more details.
  */
 export function bootstrapWebWorker(
-    appComponentType: Type, componentInjectableBindings: List<Type | Binding | List<any>> = null):
+    appComponentType: Type, componentInjectableBindings: Type | Binding | List<any>[] = null):
     Promise<ApplicationRef> {
   var sink = new PostMessageBusSink({
     postMessage:

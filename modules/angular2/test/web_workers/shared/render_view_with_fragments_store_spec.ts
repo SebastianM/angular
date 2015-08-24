@@ -19,8 +19,8 @@ export function main() {
         var viewRef: WebWorkerRenderViewRef = <WebWorkerRenderViewRef>view.viewRef;
         expect(viewRef.refNumber).toEqual(0);
 
-        var fragmentRefs: List<WebWorkerRenderFragmentRef> =
-            <List<WebWorkerRenderFragmentRef>>view.fragmentRefs;
+        var fragmentRefs: WebWorkerRenderFragmentRef[] =
+            <WebWorkerRenderFragmentRef>[]view.fragmentRefs;
         expect(fragmentRefs.length).toEqual(10);
 
         for (var i = 0; i < fragmentRefs.length; i++) {

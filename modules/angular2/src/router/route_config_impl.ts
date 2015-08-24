@@ -14,7 +14,7 @@ export {RouteDefinition} from './route_definition';
  */
 @CONST()
 export class RouteConfig {
-  constructor(public configs: List<RouteDefinition>) {}
+  constructor(public configs: RouteDefinition[]) {}
 }
 
 

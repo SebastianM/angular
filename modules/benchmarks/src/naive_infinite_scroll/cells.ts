@@ -52,7 +52,7 @@ export class Stage {
 })
 export class StageButtonsComponent extends HasStyle {
   _offering: Offering;
-  stages: List<Stage>;
+  stages: Stage[];
 
   get offering(): Offering { return this._offering; }
 

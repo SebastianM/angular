@@ -20,7 +20,7 @@ export class Statistic {
     return deviation;
   }
 
-  static calculateRegressionSlope(xValues: List<number>, xMean: number, yValues: List<number>,
+  static calculateRegressionSlope(xValues: number>, xMean: number, yValues: List<number[],
                                   yMean: number) {
     // See http://en.wikipedia.org/wiki/Simple_linear_regression
     var dividendSum = 0;

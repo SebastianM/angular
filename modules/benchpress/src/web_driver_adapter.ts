@@ -18,5 +18,5 @@ export class WebDriverAdapter {
   executeScript(script: string): Promise<any> { throw new BaseException('NYI'); }
   executeAsyncScript(script: string): Promise<any> { throw new BaseException('NYI'); }
   capabilities(): Promise<Map<string, any>> { throw new BaseException('NYI'); }
-  logs(type: string): Promise<List<any>> { throw new BaseException('NYI'); }
+  logs(type: string): Promise<any>[] { throw new BaseException('NYI'); }
 }

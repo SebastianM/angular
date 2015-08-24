@@ -51,7 +51,7 @@ export function main() {
         formModel = new ControlGroup({"login": new Control(null)});
         form.form = formModel;
 
-        loginControlDir = new NgControlName(form, new QueryList<any>());
+        loginControlDir = new NgControlName(form, new Queryany[]());
         loginControlDir.name = "login";
         loginControlDir.valueAccessor = new DummyControlValueAccessor();
       });
@@ -220,7 +220,7 @@ export function main() {
       var control;
 
       beforeEach(() => {
-        controlDir = new NgFormControl(new QueryList<any>());
+        controlDir = new NgFormControl(new Queryany[]());
         controlDir.valueAccessor = new DummyControlValueAccessor();
 
         control = new Control(null);
@@ -254,7 +254,7 @@ export function main() {
       var ngModel;
 
       beforeEach(() => {
-        ngModel = new NgModel(new QueryList<any>());
+        ngModel = new NgModel(new Queryany[]());
         ngModel.valueAccessor = new DummyControlValueAccessor();
       });
 
@@ -291,7 +291,7 @@ export function main() {
 
         var parent = new NgFormModel();
         parent.form = new ControlGroup({"name": formModel});
-        controlNameDir = new NgControlName(parent, new QueryList<any>());
+        controlNameDir = new NgControlName(parent, new Queryany[]());
         controlNameDir.name = "name";
       });
 

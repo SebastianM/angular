@@ -40,14 +40,14 @@ export class RenderElementBinder {
   index: number;
   parentIndex: number;
   distanceToParent: number;
-  directives: List<DirectiveBinder>;
+  directives: DirectiveBinder[];
   nestedProtoView: ProtoViewDto;
-  propertyBindings: List<ElementPropertyBinding>;
+  propertyBindings: ElementPropertyBinding[];
   variableBindings: Map<string, string>;
   // Note: this contains a preprocessed AST
   // that replaced the values that should be extracted from the element
   // with a local name
-  eventBindings: List<EventBinding>;
+  eventBindings: EventBinding[];
   readAttributes: Map<string, string>;
 
   constructor({index, parentIndex, distanceToParent, directives, nestedProtoView, propertyBindings,
@@ -55,11 +55,11 @@ export class RenderElementBinder {
     index?: number,
     parentIndex?: number,
     distanceToParent?: number,
-    directives?: List<DirectiveBinder>,
+    directives?: DirectiveBinder[],
     nestedProtoView?: ProtoViewDto,
-    propertyBindings?: List<ElementPropertyBinding>,
+    propertyBindings?: ElementPropertyBinding[],
     variableBindings?: Map<string, string>,
-    eventBindings?: List<EventBinding>,
+    eventBindings?: EventBinding[],
     readAttributes?: Map<string, string>
   } = {}) {
     this.index = index;
@@ -81,13 +81,13 @@ export class DirectiveBinder {
   // Note: this contains a preprocessed AST
   // that replaced the values that should be extracted from the element
   // with a local name
-  eventBindings: List<EventBinding>;
-  hostPropertyBindings: List<ElementPropertyBinding>;
+  eventBindings: EventBinding[];
+  hostPropertyBindings: ElementPropertyBinding[];
   constructor({directiveIndex, propertyBindings, eventBindings, hostPropertyBindings}: {
     directiveIndex?: number,
     propertyBindings?: Map<string, ASTWithSource>,
-    eventBindings?: List<EventBinding>,
-    hostPropertyBindings?: List<ElementPropertyBinding>
+    eventBindings?: EventBinding[],
+    hostPropertyBindings?: ElementPropertyBinding[]
   }) {
     this.directiveIndex = directiveIndex;
     this.propertyBindings = propertyBindings;
@@ -110,19 +110,19 @@ export enum ViewType {
 
 export class ProtoViewDto {
   render: RenderProtoViewRef;
-  elementBinders: List<RenderElementBinder>;
+  elementBinders: RenderElementBinder[];
   variableBindings: Map<string, string>;
   type: ViewType;
-  textBindings: List<ASTWithSource>;
+  textBindings: ASTWithSource[];
   transitiveNgContentCount: number;
 
   constructor({render, elementBinders, variableBindings, type, textBindings,
                transitiveNgContentCount}: {
     render?: RenderProtoViewRef,
-    elementBinders?: List<RenderElementBinder>,
+    elementBinders?: RenderElementBinder[],
     variableBindings?: Map<string, string>,
     type?: ViewType,
-    textBindings?: List<ASTWithSource>,
+    textBindings?: ASTWithSource[],
     transitiveNgContentCount?: number
   }) {
     this.render = render;
@@ -140,9 +140,9 @@ export class RenderDirectiveMetadata {
   id: any;
   selector: string;
   compileChildren: boolean;
-  events: List<string>;
-  properties: List<string>;
-  readAttributes: List<string>;
+  events: string[];
+  properties: string[];
+  readAttributes: string[];
   type: number;
   callOnDestroy: boolean;
   callOnChange: boolean;
@@ -166,13 +166,13 @@ export class RenderDirectiveMetadata {
     id?: string,
     selector?: string,
     compileChildren?: boolean,
-    events?: List<string>,
+    events?: string[],
     hostListeners?: Map<string, string>,
     hostProperties?: Map<string, string>,
     hostAttributes?: Map<string, string>,
     hostActions?: Map<string, string>,
-    properties?: List<string>,
-    readAttributes?: List<string>,
+    properties?: string[],
+    readAttributes?: string[],
     type?: number,
     callOnDestroy?: boolean,
     callOnChange?: boolean,
@@ -208,10 +208,10 @@ export class RenderDirectiveMetadata {
     id?: string,
     selector?: string,
     compileChildren?: boolean,
-    events?: List<string>,
+    events?: string[],
     host?: Map<string, string>,
-    properties?: List<string>,
-    readAttributes?: List<string>,
+    properties?: string[],
+    readAttributes?: string[],
     type?: number,
     callOnDestroy?: boolean,
     callOnChange?: boolean,
@@ -296,9 +296,9 @@ export class ViewDefinition {
   componentId: string;
   templateAbsUrl: string;
   template: string;
-  directives: List<RenderDirectiveMetadata>;
-  styleAbsUrls: List<string>;
-  styles: List<string>;
+  directives: RenderDirectiveMetadata[];
+  styleAbsUrls: string[];
+  styles: string[];
   encapsulation: ViewEncapsulation;
 
   constructor({componentId, templateAbsUrl, template, styleAbsUrls, styles, directives,
@@ -306,9 +306,9 @@ export class ViewDefinition {
     componentId?: string,
     templateAbsUrl?: string,
     template?: string,
-    styleAbsUrls?: List<string>,
-    styles?: List<string>,
-    directives?: List<RenderDirectiveMetadata>,
+    styleAbsUrls?: string[],
+    styles?: string[],
+    directives?: RenderDirectiveMetadata[],
     encapsulation?: ViewEncapsulation
   } = {}) {
     this.componentId = componentId;
@@ -367,7 +367,7 @@ export class RenderCompiler {
    * @return the merge result
    */
   mergeProtoViewsRecursively(
-      protoViewRefs: List<RenderProtoViewRef | List<any>>): Promise<RenderProtoViewMergeMapping> {
+      protoViewRefs: RenderProtoViewRef | List<any>>): Promise<RenderProtoViewMergeMapping[] {
     return null;
   }
 }
@@ -482,7 +482,7 @@ export class Renderer {
   /**
    * Calls a method on an element.
    */
-  invokeElementMethod(location: RenderElementRef, methodName: string, args: List<any>) {}
+  invokeElementMethod(location: RenderElementRef, methodName: string, args: any[]) {}
 
   /**
    * Sets the value of a text node.

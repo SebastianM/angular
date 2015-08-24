@@ -172,7 +172,7 @@ export function main() {
            tcb.overrideTemplate(TestComponent, template)
                .createAsync(TestComponent)
                .then((rootTC) => {
-                 var arrExpr: List<string> = rootTC.componentInstance.arrExpr;
+                 var arrExpr: string[] = rootTC.componentInstance.arrExpr;
                  detectChangesAndCheck(rootTC, 'ng-binding foo');
 
                  arrExpr.push('bar');
@@ -405,7 +405,7 @@ export function main() {
 class TestComponent {
   condition: boolean = true;
   items: any[];
-  arrExpr: List<string> = ['foo'];
+  arrExpr: string[] = ['foo'];
   objExpr = {'foo': true, 'bar': false};
   strExpr = 'foo';
 }

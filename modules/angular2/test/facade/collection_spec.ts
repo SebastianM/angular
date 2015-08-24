@@ -10,7 +10,7 @@ import {
 
 export function main() {
   describe('ListWrapper', () => {
-    var l: List<number>;
+    var l: number[];
 
     describe('splice', () => {
       it('should remove sublist of given length and return it', () => {

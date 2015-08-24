@@ -24,7 +24,7 @@ export enum RecordType {
 
 export class ProtoRecord {
   constructor(public mode: RecordType, public name: string, public funcOrValue,
-              public args: List<any>, public fixedArgs: List<any>, public contextIndex: number,
+              public args: any>, public fixedArgs: List<any[], public contextIndex: number,
               public directiveIndex: DirectiveIndex, public selfIndex: number,
               public bindingRecord: BindingRecord, public lastInBinding: boolean,
               public lastInDirective: boolean, public argumentToPureFunction: boolean,

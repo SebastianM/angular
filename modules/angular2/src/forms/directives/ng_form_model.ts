@@ -93,7 +93,7 @@ const formDirectiveBinding =
 })
 export class NgFormModel extends ControlContainer implements Form {
   form: ControlGroup = null;
-  directives: List<NgControl> = [];
+  directives: NgControl[] = [];
   ngSubmit = new EventEmitter();
 
   onChange(_) { this._updateDomValue(); }
@@ -102,7 +102,7 @@ export class NgFormModel extends ControlContainer implements Form {
 
   get control(): ControlGroup { return this.form; }
 
-  get path(): List<string> { return []; }
+  get path(): string[] { return []; }
 
   addControl(dir: NgControl): void {
     var c: any = this.form.find(dir.path);

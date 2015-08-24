@@ -9,11 +9,11 @@ export function iterableChangesAsString({collection = CONST_EXPR([]), previous =
 }
 
 export function kvChangesAsString({map, previous, additions, changes, removals}: {
-  map?: List<any>,
-  previous?: List<any>,
-  additions?: List<any>,
-  changes?: List<any>,
-  removals?: List<any>
+  map?: any[],
+  previous?: any[],
+  additions?: any[],
+  changes?: any[],
+  removals?: any[]
 }): string {
   if (isBlank(map)) map = [];
   if (isBlank(previous)) previous = [];

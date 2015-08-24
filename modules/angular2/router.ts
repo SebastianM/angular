@@ -37,9 +37,9 @@ import {Binding} from './di';
 import {CONST_EXPR} from './src/facade/lang';
 import {List} from './src/facade/collection';
 
-export const ROUTER_DIRECTIVES: List<any> = CONST_EXPR([RouterOutlet, RouterLink]);
+export const ROUTER_DIRECTIVES: any[] = CONST_EXPR([RouterOutlet, RouterLink]);
 
-export const ROUTER_BINDINGS: List<any> = CONST_EXPR([
+export const ROUTER_BINDINGS: any[] = CONST_EXPR([
   RouteRegistry,
   Pipeline,
   CONST_EXPR(new Binding(LocationStrategy, {toClass: HTML5LocationStrategy})),

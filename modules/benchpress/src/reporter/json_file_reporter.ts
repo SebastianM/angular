@@ -16,7 +16,7 @@ export class JsonFileReporter extends Reporter {
   // TODO(tbosch): use static values when our transpiler supports them
   static get PATH(): OpaqueToken { return _PATH; }
   // TODO(tbosch): use static values when our transpiler supports them
-  static get BINDINGS(): List<Binding> { return _BINDINGS; }
+  static get BINDINGS(): Binding[] { return _BINDINGS; }
 
   _writeFile: Function;
   _path: string;
@@ -35,8 +35,8 @@ export class JsonFileReporter extends Reporter {
     return PromiseWrapper.resolve(null);
   }
 
-  reportSample(completeSample: List<MeasureValues>,
-               validSample: List<MeasureValues>): Promise<any> {
+  reportSample(completeSample: MeasureValues[],
+               validSample: MeasureValues>): Promise<any[] {
     var content = Json.stringify({
       'description': this._description,
       'completeSample': completeSample,

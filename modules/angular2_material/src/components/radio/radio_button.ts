@@ -60,7 +60,7 @@ export class MdRadioGroup {
   radioDispatcher: MdRadioDispatcher;
 
   /** List of child radio buttons. */
-  radios_: List<MdRadioButton>;
+  radios_: MdRadioButton[];
 
   activedescendant: any;
 

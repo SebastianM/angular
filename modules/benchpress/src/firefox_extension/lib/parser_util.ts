@@ -5,7 +5,7 @@
  * @return {Array<Object>} An array of recognized events that are captured
  *     within the perf profile.
  */
-export function convertPerfProfileToEvents(perfProfile: any): List<any> {
+export function convertPerfProfileToEvents(perfProfile: any): any[] {
   var inProgressEvents = new Map();  // map from event name to start time
   var finishedEvents = [];           // Array<Event> finished events
   var addFinishedEvent = function(eventName, startTime, endTime) {

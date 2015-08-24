@@ -7,12 +7,12 @@ import {
   isListLikeIterable
 } from 'angular2/src/facade/collection';
 
-function paramParser(rawParams: string = ''): Map<string, List<string>> {
-  var map: Map<string, List<string>> = new Map();
+function paramParser(rawParams: string = ''): Map<string, string>[] {
+  var map: Map<string, string>[] = new Map();
   if (rawParams.length > 0) {
-    var params: List<string> = StringWrapper.split(rawParams, new RegExp('&'));
+    var params: string[] = StringWrapper.split(rawParams, new RegExp('&'));
     ListWrapper.forEach(params, (param: string) => {
-      var split: List<string> = StringWrapper.split(param, new RegExp('='));
+      var split: string[] = StringWrapper.split(param, new RegExp('='));
       var key = ListWrapper.get(split, 0);
       var val = ListWrapper.get(split, 1);
       var list = isPresent(map.get(key)) ? map.get(key) : [];
@@ -35,7 +35,7 @@ export const URLSearchParamsUnionFixer: string = CONST_EXPR("UnionFixer");
  *   - replaceAll()
  */
 export class URLSearchParams {
-  paramsMap: Map<string, List<string>>;
+  paramsMap: Map<string, string>[];
   constructor(public rawParams: string = '') { this.paramsMap = paramParser(rawParams); }
 
   clone(): URLSearchParams {
@@ -55,7 +55,7 @@ export class URLSearchParams {
     }
   }
 
-  getAll(param: string): List<string> {
+  getAll(param: string): string[] {
     var mapParam = this.paramsMap.get(param);
     return isPresent(mapParam) ? mapParam : [];
   }

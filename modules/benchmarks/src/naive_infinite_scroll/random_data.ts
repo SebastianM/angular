@@ -10,7 +10,7 @@ import {
   AAT_STATUS_LIST
 } from './common';
 
-export function generateOfferings(count: number): List<Offering> {
+export function generateOfferings(count: number): Offering[] {
   var res = [];
   for (var i = 0; i < count; i++) {
     res.push(generateOffering(i));

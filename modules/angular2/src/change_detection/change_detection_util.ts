@@ -134,7 +134,7 @@ export class ChangeDetectionUtil {
   static operation_logical_or(left, right): any { return left || right; }
   static cond(cond, trueVal, falseVal): any { return cond ? trueVal : falseVal; }
 
-  static mapFn(keys: List<any>): any {
+  static mapFn(keys: any[]): any {
     function buildMap(values): StringMap<any, any> {
       var res = StringMapWrapper.create();
       for (var i = 0; i < keys.length; ++i) {

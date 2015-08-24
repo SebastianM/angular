@@ -13,7 +13,7 @@ import {Options} from './common_options';
  */
 @ABSTRACT()
 export class WebDriverExtension {
-  static bindTo(childTokens): List<Binding> {
+  static bindTo(childTokens): Binding[] {
     var res = [
       bind(_CHILDREN)
           .toFactory(
@@ -57,7 +57,7 @@ export class WebDriverExtension {
    * Based on [Chrome Trace Event
    *Format](https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/edit)
    **/
-  readPerfLog(): Promise<List<any>> { throw new BaseException('NYI'); }
+  readPerfLog(): Promise<any>[] { throw new BaseException('NYI'); }
 
   perfLogFeatures(): PerfLogFeatures { throw new BaseException('NYI'); }
 

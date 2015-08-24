@@ -6,7 +6,7 @@ import {List, ListWrapper} from 'angular2/src/facade/collection';
  */
 export class MdRadioDispatcher {
   // TODO(jelbourn): Change this to TypeScript syntax when supported.
-  listeners_: List<Function>;
+  listeners_: Function[];
 
   constructor() {
     this.listeners_ = [];

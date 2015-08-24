@@ -7,7 +7,7 @@ export class MockLocationStrategy extends LocationStrategy {
   internalBaseHref: string = '/';
   internalPath: string = '/';
   internalTitle: string = '';
-  urlChanges: List<string> = [];
+  urlChanges: string[] = [];
   _subject: EventEmitter = new EventEmitter();
   constructor() { super(); }
 

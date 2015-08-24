@@ -47,10 +47,10 @@ class App {
   template: `{{frame.name}}(<span *ng-for="var lock of locks">{{lock.name}}</span>)`
 })
 class Door {
-  locks: QueryList<Lock>;
+  locks: QueryLock[];
   frame: Frame;
 
-  constructor(@Query(forwardRef(() => Lock)) locks: QueryList<Lock>,
+  constructor(@Query(forwardRef(() => Lock)) locks: QueryLock[],
               @Inject(forwardRef(() => Frame)) frame: Frame) {
     this.frame = frame;
     this.locks = locks;

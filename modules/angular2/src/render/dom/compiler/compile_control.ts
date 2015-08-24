@@ -14,7 +14,7 @@ export class CompileControl {
   _additionalChildren: CompileElement[] = null;
   _ignoreCurrentElement: boolean;
 
-  constructor(public _steps: List<CompileStep>) {}
+  constructor(public _steps: CompileStep[]) {}
 
   // only public so that it can be used by compile_pipeline
   internalProcess(results: any[], startStepIndex: number, parent: CompileElement,

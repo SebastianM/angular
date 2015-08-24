@@ -120,10 +120,10 @@ export function main() {
 }
 
 class FakeEventManagerPlugin extends EventManagerPlugin {
-  _supports: List<string>;
+  _supports: string[];
   _nonBubbleEventHandlers: Map<string, Function>;
   _bubbleEventHandlers: Map<string, Function>;
-  constructor(supports: List<string>) {
+  constructor(supports: string[]) {
     super();
     this._supports = supports;
     this._nonBubbleEventHandlers = new Map();

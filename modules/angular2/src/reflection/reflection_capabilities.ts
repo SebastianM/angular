@@ -82,7 +82,7 @@ export class ReflectionCapabilities implements PlatformReflectionCapabilities {
         `Cannot create a factory for '${stringify(t)}' because its constructor has more than 20 arguments`);
   }
 
-  _zipTypesAndAnnotaions(paramTypes, paramAnnotations): List<List<any>> {
+  _zipTypesAndAnnotaions(paramTypes, paramAnnotations): List<any>[] {
     var result;
 
     if (typeof paramTypes === 'undefined') {
@@ -109,7 +109,7 @@ export class ReflectionCapabilities implements PlatformReflectionCapabilities {
     return result;
   }
 
-  parameters(typeOfFunc: Type): List<List<any>> {
+  parameters(typeOfFunc: Type): List<any>[] {
     // Prefer the direct API.
     if (isPresent((<any>typeOfFunc).parameters)) {
       return (<any>typeOfFunc).parameters;
@@ -124,7 +124,7 @@ export class ReflectionCapabilities implements PlatformReflectionCapabilities {
     return ListWrapper.createFixedSize((<any>typeOfFunc).length);
   }
 
-  annotations(typeOfFunc: Type): List<any> {
+  annotations(typeOfFunc: Type): any[] {
     // Prefer the direct API.
     if (isPresent((<any>typeOfFunc).annotations)) {
       var annotations = (<any>typeOfFunc).annotations;
@@ -140,7 +140,7 @@ export class ReflectionCapabilities implements PlatformReflectionCapabilities {
     return [];
   }
 
-  interfaces(type: Type): List<any> {
+  interfaces(type: Type): any[] {
     throw new BaseException("JavaScript does not support interfaces");
   }
 

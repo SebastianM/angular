@@ -5,7 +5,7 @@ import {Promise, PromiseWrapper} from 'angular2/src/facade/async';
 import {Metric} from '../metric';
 
 export class MultiMetric extends Metric {
-  static createBindings(childTokens): List<Binding> {
+  static createBindings(childTokens): Binding[] {
     return [
       bind(_CHILDREN)
           .toFactory(
@@ -15,7 +15,7 @@ export class MultiMetric extends Metric {
     ];
   }
 
-  constructor(private _metrics: List<Metric>) { super(); }
+  constructor(private _metrics: Metric[]) { super(); }
 
   /**
    * Starts measuring

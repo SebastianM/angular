@@ -54,9 +54,9 @@ import {List, ListWrapper, MapWrapper} from 'angular2/src/facade/collection';
  *  `
  * })
  * class Tabs {
- *   panes: QueryList<Pane>
+ *   panes: QueryPane[]
  *
- *   constructor(@Query(Pane) panes:QueryList<Pane>) {
+ *   constructor(@Query(Pane) panes:QueryPane[]) {
  *     this.panes = panes;
  *   }
  * }
@@ -71,12 +71,12 @@ import {List, ListWrapper, MapWrapper} from 'angular2/src/facade/collection';
  * }
  * ```
  */
-export class QueryList<T> {
+export class QueryT[] {
   protected _results: List < T >= [];
   protected _callbacks: List < () => void >= [];
   protected _dirty: boolean = false;
 
-  reset(newList: List<T>): void {
+  reset(newList: T[]): void {
     this._results = newList;
     this._dirty = true;
   }

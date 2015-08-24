@@ -105,7 +105,7 @@ class MultipleViewResolver extends ViewResolver {
   _multiple: number;
   _cache: Map<any, any>;
 
-  constructor(multiple: number, components: List<Type>) {
+  constructor(multiple: number, components: Type[]) {
     super();
     this._multiple = multiple;
     this._cache = new Map();

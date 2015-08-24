@@ -9,7 +9,7 @@ import {MeasureValues} from '../measure_values';
  */
 export class SizeValidator extends Validator {
   // TODO(tbosch): use static values when our transpiler supports them
-  static get BINDINGS(): List<Binding> { return _BINDINGS; }
+  static get BINDINGS(): Binding[] { return _BINDINGS; }
   // TODO(tbosch): use static values when our transpiler supports them
   static get SAMPLE_SIZE() { return _SAMPLE_SIZE; }
 
@@ -22,7 +22,7 @@ export class SizeValidator extends Validator {
 
   describe(): StringMap<string, any> { return {'sampleSize': this._sampleSize}; }
 
-  validate(completeSample: List<MeasureValues>): List<MeasureValues> {
+  validate(completeSample: MeasureValues>): List<MeasureValues[] {
     if (completeSample.length >= this._sampleSize) {
       return ListWrapper.slice(completeSample, completeSample.length - this._sampleSize,
                                completeSample.length);

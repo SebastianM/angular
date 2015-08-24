@@ -27,7 +27,7 @@ export class TestRootView {
   viewRef: RenderViewRef;
   fragments: RenderFragmentRef[];
   hostElement: Element;
-  events: List<List<any>>;
+  events: List<any>[];
 
   constructor(viewWithFragments: RenderViewWithFragments) {
     this.viewRef = viewWithFragments.viewRef;
@@ -48,9 +48,9 @@ export function elRef(renderView: RenderViewRef, boundElementIndex: number) {
 export function rootNodes(view: RenderViewRef) {}
 
 class LoggingEventDispatcher implements RenderEventDispatcher {
-  log: List<List<any>>;
+  log: List<any>[];
 
-  constructor(log: List<List<any>>) { this.log = log; }
+  constructor(log: List<any>[]) { this.log = log; }
 
   dispatchRenderEvent(elementIndex: number, eventName: string, locals: Map<string, any>) {
     this.log.push([elementIndex, eventName, locals]);
@@ -83,7 +83,7 @@ export class DomTestbed {
     return PromiseWrapper.all(promises);
   }
 
-  merge(protoViews: List<ProtoViewDto | RenderProtoViewRef>): Promise<RenderProtoViewMergeMapping> {
+  merge(protoViews: ProtoViewDto | RenderProtoViewRef>): Promise<RenderProtoViewMergeMapping[] {
     return this.compiler.mergeProtoViewsRecursively(collectMergeRenderProtoViewsRecurse(
         <ProtoViewDto>protoViews[0], ListWrapper.slice(protoViews, 1)));
   }
@@ -114,8 +114,8 @@ export class DomTestbed {
 }
 
 function collectMergeRenderProtoViewsRecurse(current: ProtoViewDto,
-                                             components: List<ProtoViewDto | RenderProtoViewRef>):
-    List<RenderProtoViewRef | List<any>> {
+                                             components: ProtoViewDto | RenderProtoViewRef[]):
+    RenderProtoViewRef | List<any>[] {
   var result = [current.render];
   current.elementBinders.forEach((elementBinder) => {
     if (isPresent(elementBinder.nestedProtoView)) {

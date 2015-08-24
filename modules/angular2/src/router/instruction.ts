@@ -42,7 +42,7 @@ export class Instruction {
  */
 export class PrimaryInstruction {
   constructor(public component: ComponentInstruction, public child: PrimaryInstruction,
-              public auxUrls: List<Url>) {}
+              public auxUrls: Url[]) {}
 }
 
 export function stringifyInstruction(instruction: Instruction): string {
@@ -87,7 +87,7 @@ function stringifyAux(instruction: Instruction): string {
 export class ComponentInstruction {
   reuse: boolean = false;
 
-  constructor(public urlPath: string, public urlParams: List<string>,
+  constructor(public urlPath: string, public urlParams: string[],
               private _recognizer: PathRecognizer, public params: StringMap<string, any> = null) {}
 
   get componentType() { return this._recognizer.handler.componentType; }

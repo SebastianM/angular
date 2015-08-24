@@ -56,9 +56,9 @@ import {DEFAULT} from 'angular2/change_detection';
  * - `@Host() directive:DirectiveType`: any directive that matches the type between the current
  * element and the
  *    Shadow DOM root.
- * - `@Query(DirectiveType) query:QueryList<DirectiveType>`: A live collection of direct child
+ * - `@Query(DirectiveType) query:QueryDirectiveType[]`: A live collection of direct child
  * directives.
- * - `@QueryDescendants(DirectiveType) query:QueryList<DirectiveType>`: A live collection of any
+ * - `@QueryDescendants(DirectiveType) query:QueryDirectiveType[]`: A live collection of any
  * child directives.
  *
  * To inject element-specific special objects, declare the constructor parameter as:
@@ -192,7 +192,7 @@ import {DEFAULT} from 'angular2/change_detection';
  * ```
  * @Directive({ selector: '[my-directive]' })
  * class MyDirective {
- *   constructor(@Query(Dependency) dependencies:QueryList<Dependency>) {
+ *   constructor(@Query(Dependency) dependencies:QueryDependency[]) {
  *   }
  * }
  * ```
@@ -208,7 +208,7 @@ import {DEFAULT} from 'angular2/change_detection';
  * ```
  * @Directive({ selector: '[my-directive]' })
  * class MyDirective {
- *   constructor(@Query(Dependency, {descendants: true}) dependencies:QueryList<Dependency>) {
+ *   constructor(@Query(Dependency, {descendants: true}) dependencies:QueryDependency[]) {
  *   }
  * }
  * ```
@@ -482,7 +482,7 @@ export class DirectiveMetadata extends InjectableMetadata {
    * ```
    *
    */
-  properties: List<string>;
+  properties: string[];
 
   /**
    * Enumerates the set of emitted events.
@@ -527,7 +527,7 @@ export class DirectiveMetadata extends InjectableMetadata {
    * ```
    *
    */
-  events: List<string>;
+  events: string[];
 
   /**
    * Specifiy the events, actions, properties and attributes related to the host element.
@@ -661,7 +661,7 @@ export class DirectiveMetadata extends InjectableMetadata {
    *
    * See {@link LifecycleEvent} for details.
    */
-  lifecycle: List<LifecycleEvent>;
+  lifecycle: LifecycleEvent[];
 
   /**
    * If set to false the compiler does not compile the children of this directive.
@@ -699,7 +699,7 @@ export class DirectiveMetadata extends InjectableMetadata {
    * }
    * ```
    */
-  bindings: List<any>;
+  bindings: any[];
 
   /**
    * Defines the name that can be used in the template to assign this directive to a variable.
@@ -733,11 +733,11 @@ export class DirectiveMetadata extends InjectableMetadata {
                   compileChildren = true,
               }: {
     selector?: string,
-    properties?: List<string>,
-    events?: List<string>,
+    properties?: string[],
+    events?: string[],
     host?: StringMap<string, string>,
-    lifecycle?: List<LifecycleEvent>,
-    bindings?: List<any>,
+    lifecycle?: LifecycleEvent[],
+    bindings?: any[],
     exportAs?: string,
     compileChildren?: boolean,
   } = {}) {
@@ -844,19 +844,19 @@ export class ComponentMetadata extends DirectiveMetadata {
    *
    * ```
    */
-  viewBindings: List<any>;
+  viewBindings: any[];
 
   constructor({selector, properties, events, host, exportAs, lifecycle, bindings, viewBindings,
                changeDetection = DEFAULT, compileChildren = true}: {
     selector?: string,
-    properties?: List<string>,
-    events?: List<string>,
+    properties?: string[],
+    events?: string[],
     host?: StringMap<string, string>,
-    lifecycle?: List<LifecycleEvent>,
-    bindings?: List<any>,
+    lifecycle?: LifecycleEvent[],
+    bindings?: any[],
     exportAs?: string,
     compileChildren?: boolean,
-    viewBindings?: List<any>,
+    viewBindings?: any[],
     changeDetection?: string,
   } = {}) {
     super({

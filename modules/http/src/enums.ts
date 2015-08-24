@@ -49,7 +49,7 @@ export enum RequestMethods {
 // TODO: Remove this when enum lookups are available in ts2dart
 // https://github.com/angular/ts2dart/issues/221
 export class RequestMethodsMap {
-  private _methods: List<string>;
+  private _methods: string[];
   constructor() { this._methods = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD', 'PATCH']; }
   getMethod(method: number): string { return this._methods[method]; }
 }

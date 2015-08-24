@@ -83,7 +83,7 @@ class DynamicDummy {
   `
 })
 class AppComponent {
-  list: List<any>;
+  list: any[];
   testingPlainComponents: boolean;
   testingWithDirectives: boolean;
   testingDynamicComponents: boolean;

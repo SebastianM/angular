@@ -3,7 +3,7 @@ import * as Rx from 'rx';
 import {ListWrapper} from 'angular2/src/facade/collection';
 
 export class MockEventEmitter extends EventEmitter {
-  private _nextFns: List<Function> = [];
+  private _nextFns: Function[] = [];
 
   constructor() { super(); }
 

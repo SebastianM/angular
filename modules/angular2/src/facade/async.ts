@@ -24,7 +24,7 @@ export class PromiseWrapper {
     return promise.catch(onError);
   }
 
-  static all(promises: List<any>): Promise<any> {
+  static all(promises: any>): Promise<any[] {
     if (promises.length == 0) return Promise.resolve([]);
     return Promise.all(promises);
   }

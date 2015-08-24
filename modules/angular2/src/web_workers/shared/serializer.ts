@@ -115,7 +115,7 @@ export class Serializer {
       return null;
     }
     if (isArray(map)) {
-      var obj: List<any> = new List<any>();
+      var obj: any> = new List<any[]();
       ListWrapper.forEach(map, (val) => { obj.push(this.deserialize(val, type, data)); });
       return obj;
     }

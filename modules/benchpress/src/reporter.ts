@@ -15,8 +15,8 @@ export class Reporter {
 
   reportMeasureValues(values: MeasureValues): Promise<any> { throw new BaseException('NYI'); }
 
-  reportSample(completeSample: List<MeasureValues>,
-               validSample: List<MeasureValues>): Promise<any> {
+  reportSample(completeSample: MeasureValues[],
+               validSample: MeasureValues>): Promise<any[] {
     throw new BaseException('NYI');
   }
 }

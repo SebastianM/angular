@@ -40,7 +40,7 @@ export class WebWorkerMain {
 
 export class ReceivedMessage {
   method: string;
-  args: List<any>;
+  args: any[];
   id: string;
   type: string;
 

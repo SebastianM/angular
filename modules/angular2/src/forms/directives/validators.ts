@@ -17,3 +17,14 @@ const requiredValidatorBinding =
 export class NgRequiredValidator extends NgValidator {
   get validator(): Function { return Validators.required; }
 }
+
+const minLengthValidatorBinding =
+    CONST_EXPR(new Binding(NgValidator, {toAlias: forwardRef(() => NgMinLengthValidator)}));
+
+@Directive({
+  selector: '[minlength][ng-control],[minlength][ng-form-control],[minlength][ng-model]',
+  bindings: [minLengthValidatorBinding]
+})
+export class NgMinLengthValidator extends NgValidator {
+  get validator(): Function { return Validators.minLength; }
+}
